@@ -2,14 +2,14 @@
 
 ## Tabla Comparativa Rápida
 
-| Aspecto          | Clean Architecture   | Onion Architecture | Hexagonal Architecture          |
-| ---------------- | -------------------- | ------------------ | ------------------------------- |
-| **Autor**        | Robert C. Martin     | Jeffrey Palermo    | Alistair Cockburn               |
-| **Año**          | ~2012                | ~2008              | ~2005                           |
-| **Capas**        | 4 capas concéntricas | Capas tipo cebolla | Sin capas (puertos/adaptadores) |
-| **Enfoque**      | Casos de uso         | Modelo de dominio  | Puertos y adaptadores           |
-| **Dependencias** | Hacia el centro      | Hacia el centro    | Hacia el núcleo                 |
-| **Estado**       | ✅ Implementado      | 🔄 Pendiente       | 🔄 Pendiente                    |
+| Aspecto          | Clean Architecture   | Onion Architecture | Hexagonal Architecture          | Vertical Slice Architecture |
+| ---------------- | -------------------- | ------------------ | ------------------------------- | --------------------------- |
+| **Autor**        | Robert C. Martin     | Jeffrey Palermo    | Alistair Cockburn               | Jimmy Bogard                |
+| **Año**          | ~2012                | ~2008              | ~2005                           | ~2015                       |
+| **Capas**        | 4 capas concéntricas | Capas tipo cebolla | Sin capas (puertos/adaptadores) | Por feature/slice           |
+| **Enfoque**      | Casos de uso         | Modelo de dominio  | Puertos y adaptadores           | Feature completa            |
+| **Dependencias** | Hacia el centro      | Hacia el centro    | Hacia el núcleo                 | Minimizadas                 |
+| **Estado**       | ✅ Implementado      | 🔄 Pendiente       | 🔄 Pendiente                    | 🔄 Pendiente                |
 
 ---
 
@@ -60,18 +60,18 @@
 ### Estructura (Teórica):
 
 ```
-┌─────────────────────────────────┐
-│    Infrastructure               │ Capa Externa
-│  ┌───────────────────────────┐  │
-│  │  Application Services     │  │ Capa de Servicios
-│  │  ┌─────────────────────┐  │  │
-│  │  │  Domain Services    │  │  │ Servicios de Dominio
-│  │  │  ┌───────────────┐  │  │  │
-│  │  │  │ Domain Model  │  │  │  │ Núcleo
-│  │  │  └───────────────┘  │  │  │
-│  │  └─────────────────────┘  │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
+┌───────────────────────────────────────────┐
+│             Infrastructure                │
+│  ┌─────────────────────────────────────┐  │
+│  │          Application Services       │  │
+│  │  ┌───────────────────────────────┐  │  │
+│  │  │       Domain Services         │  │  │
+│  │  │  ┌─────────────────────────┐  │  │  │
+│  │  │  │    Domain Model         │  │  │  │
+│  │  │  └─────────────────────────┘  │  │  │
+│  │  └───────────────────────────────┘  │  │
+│  └─────────────────────────────────────┘  │
+└───────────────────────────────────────────┘
 ```
 
 ### Diferencias con Clean:
@@ -151,15 +151,77 @@
 
 ---
 
-## 🎭 Similitudes Entre las Tres
+## 📐 Vertical Slice Architecture
 
-| Principio                   | Clean | Onion | Hexagonal |
-| --------------------------- | ----- | ----- | --------- |
-| Inversión de Dependencias   | ✅    | ✅    | ✅        |
-| Dominio en el Centro        | ✅    | ✅    | ✅        |
-| Independencia de Frameworks | ✅    | ✅    | ✅        |
-| Testabilidad                | ✅    | ✅    | ✅        |
-| Boundaries Explícitos       | ✅    | ✅    | ✅        |
+### Estructura (Teórica):
+
+```
+features/
+├── create-cart/
+│   ├── CreateCart.cs           # Handler completo
+│   ├── CreateCartValidator.cs  # Validación
+│   └── CreateCartEndpoint.cs   # Endpoint
+├── add-product-to-cart/
+│   ├── AddProductToCart.cs
+│   ├── AddProductValidator.cs
+│   └── AddProductEndpoint.cs
+├── get-cart/
+│   ├── GetCart.cs
+│   └── GetCartEndpoint.cs
+└── shared/
+    ├── Cart.cs                 # Entidad compartida (mínima)
+    └── ICartRepository.cs      # Abstracción compartida (mínima)
+```
+
+### Conceptos Clave:
+
+- **Vertical Slice**: Feature completa end-to-end
+- **Minimal Coupling**: Cada slice es independiente
+- **No Capas**: No separación técnica horizontal
+- **Shared Kernel**: Solo lo esencial compartido
+
+### Filosofía:
+
+> "Organiza por lo que cambia junto, no por tipo técnico"
+
+- Las capas asumen que toda la capa cambia junta
+- Vertical Slice asume que cada feature cambia independientemente
+- Minimiza abstracciones prematuras
+- Maximiza cohesión por caso de uso
+
+### Ventajas Esperadas:
+
+✅ Extremadamente simple de entender  
+✅ Cambios localizados (toda la feature en un lugar)  
+✅ Menos abstracciones innecesarias  
+✅ Fácil agregar/remover features  
+✅ Ideal para equipos pequeños
+
+### Desafíos Esperados:
+
+⚠️ Puede haber duplicación de código  
+⚠️ Menos reutilización  
+⚠️ Requiere disciplina para mantener slices independientes  
+⚠️ Puede crecer mucho en proyectos grandes
+
+### A Implementar:
+
+🔄 Features por slice  
+🔄 Handlers con MediatR/similar  
+🔄 Minimal shared kernel  
+🔄 Endpoints independientes
+
+---
+
+## 🎭 Similitudes Entre las Cuatro
+
+| Principio                   | Clean | Onion | Hexagonal | Vertical Slice |
+| --------------------------- | ----- | ----- | --------- | -------------- |
+| Inversión de Dependencias   | ✅    | ✅    | ✅        | ⚠️ Mínima      |
+| Dominio en el Centro        | ✅    | ✅    | ✅        | ⚠️ Distribuido |
+| Independencia de Frameworks | ✅    | ✅    | ✅        | ✅             |
+| Testabilidad                | ✅    | ✅    | ✅        | ✅             |
+| Boundaries Explícitos       | ✅    | ✅    | ✅        | ⚠️ Por Feature |
 
 ---
 
@@ -179,6 +241,12 @@
 
 - **Onion**: Capas anidadas
 - **Hexagonal**: Sin capas, solo núcleo + adaptadores
+
+### Capas vs Slices:
+
+- **Clean/Onion/Hexagonal**: Organización horizontal por tipo técnico
+- **Vertical Slice**: Organización vertical por feature/caso de uso
+- **Trade-off**: Reutilización vs. Simplicidad
 
 ---
 
@@ -229,6 +297,23 @@
 - Equipos que prefieren capas claras
 - Primera vez implementando arquitectura limpia
 
+### Vertical Slice Architecture
+
+**Ideal para:**
+
+- Proyectos nuevos/MVPs que necesitan velocidad
+- Equipos pequeños que valoran simplicidad
+- Aplicaciones CRUD-heavy con features independientes
+- Cuando el código cambia frecuentemente por feature
+- Reducir ceremony y boilerplate
+
+**Evitar en:**
+
+- Dominios complejos con mucha lógica compartida
+- Cuando se requiere máxima reutilización
+- Equipos grandes que necesitan estructura clara
+- Proyectos con alta complejidad algorítmica
+
 ---
 
 ## 🎯 Roadmap del Proyecto
@@ -258,12 +343,21 @@
 - [ ] Driven Ports & Adapters
 - [ ] Comparativa con Clean y Onion
 
-### 📝 Fase 4: Documentación Final
+### 🔄 Fase 4: Vertical Slice Architecture (PENDIENTE)
 
-- [ ] Comparativa detallada de las 3
+- [ ] Setup del proyecto
+- [ ] Features por slice
+- [ ] Handlers independientes
+- [ ] Minimal abstracciones
+- [ ] Comparativa con arquitecturas en capas
+
+### 🔄Fase 5: Documentación Final
+
+- [ ] Comparativa detallada de las 4
 - [ ] Guía de decisión: cuándo usar cada una
 - [ ] Casos de estudio
 - [ ] Conclusiones y recomendaciones
+- [ ] Trade-offs: Capas vs. Slices
 
 ---
 
@@ -286,7 +380,12 @@
 - 📝 [Ports and Adapters Pattern](https://herbertograca.com/2017/09/14/ports-adapters-architecture/)
 - 📘 [Hexagonal Architecture Explained](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749)
 
+### Vertical Slice Architecture
+
+- 📝 [Vertical Slice Architecture - Jimmy Bogard](https://www.jimmybogard.com/vertical-slice-architecture/)
+- 🎥 [GOTO 2018 - Vertical Slice Architecture](https://www.youtube.com/watch?v=SUiWfhAhgQw)
+- 📝 [Restructuring to a Vertical Slice Architecture](https://codeopinion.com/restructuring-to-a-vertical-slice-architecture/)
+
 ---
 
-**Última Actualización**: 8 de marzo de 2026  
-**Estado**: Clean Architecture ✅ | Onion 🔄 | Hexagonal 🔄
+**Última Actualización**: 8 de marzo de 2026

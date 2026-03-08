@@ -1,6 +1,6 @@
 # Proyecto de Arquitecturas Puras
 
-Proyecto comparativo que implementa el mismo dominio de negocio (carrito de compras) usando tres arquitecturas de software puras:
+Proyecto comparativo que implementa el mismo dominio de negocio (carrito de compras) usando cuatro arquitecturas de software populares:
 
 ## 📊 Dominio de Negocio
 
@@ -61,6 +61,17 @@ Arquitectura basada en puertos y adaptadores:
 - Adaptadores (implementaciones concretas)
 - Lado izquierdo (driving adapters) y derecho (driven adapters)
 
+### 4. **Vertical Slice Architecture** (Jimmy Bogard)
+
+Ubicación: `./vertical-slice-architecture` _(Próximamente)_
+
+Arquitectura organizada por features/casos de uso en lugar de capas técnicas:
+
+- Cada slice es autónomo y contiene todo lo necesario
+- Minimiza acoplamiento entre features
+- Enfocada en casos de uso individuales
+- Reduce abstracciones innecesarias
+
 ## 🚀 Inicio Rápido
 
 ### Instalación
@@ -85,6 +96,9 @@ npm run dev:onion
 
 # Ejecutar Hexagonal Architecture (próximamente)
 npm run dev:hexagonal
+
+# Ejecutar Vertical Slice Architecture (próximamente)
+npm run dev:vertical
 ```
 
 ### Build y Testing
@@ -131,9 +145,13 @@ npm run clean:all
 
 - _(Próximamente)_
 
+#### Vertical Slice Architecture 🔄
+
+- _(Próximamente)_
+
 ## 🎯 Objetivo del Proyecto
 
-Comparar y contrastar las tres arquitecturas:
+Comparar y contrastar las cuatro arquitecturas:
 
 - Similitudes y diferencias
 - Ventajas y desventajas
@@ -141,12 +159,14 @@ Comparar y contrastar las tres arquitecturas:
 - Patrones de diseño aplicados
 - Gestión de dependencias
 - Testabilidad
+- Complejidad vs. Simplicidad
 
 ## 📖 Recursos
 
 - [Clean Architecture Book - Robert C. Martin](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 - [Onion Architecture - Jeffrey Palermo](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
 - [Hexagonal Architecture - Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
+- [Vertical Slice Architecture - Jimmy Bogard](https://www.jimmybogard.com/vertical-slice-architecture/)
 
 ## 📄 Licencia
 
