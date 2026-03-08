@@ -74,6 +74,8 @@
 └───────────────────────────────────────────┘
 ```
 
+**Flujo de Dependencias:** Infrastructure → Application → Domain Services → Domain Model
+
 ### Diferencias con Clean:
 
 - Más énfasis en el **Domain Model** rico

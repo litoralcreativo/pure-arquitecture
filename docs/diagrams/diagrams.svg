@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="diagrams.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#1e1e1e"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="false"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:zoom="1.008497"
+     inkscape:cx="406.54558"
+     inkscape:cy="255.33045"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-global="true"
+     inkscape:snap-grids="true"
+     inkscape:snap-text-baseline="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Clean"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1532-8"
+       cx="55.000004"
+       cy="55.000004"
+       r="39.75" />
+    <circle
+       style="fill:#3d8f3d;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1532"
+       cx="55"
+       cy="55"
+       r="29.75" />
+    <circle
+       style="fill:#8f3d3d;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1366"
+       cx="55"
+       cy="55"
+       r="19.75" />
+    <circle
+       style="fill:#a3a329;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path870"
+       cx="55"
+       cy="55"
+       r="9.75" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="55.159084"
+       y="55.946018"
+       id="text10994"><tspan
+         sodipodi:role="line"
+         id="tspan10992"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="55.159084"
+         y="55.946018">Entities</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="55.010773"
+       y="42.503796"
+       id="text22382"><tspan
+         sodipodi:role="line"
+         id="tspan22380"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="55.010773"
+         y="42.503796">Use cases</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="54.964405"
+       y="32.432793"
+       id="text24104"><tspan
+         sodipodi:role="line"
+         id="tspan24102"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="54.964405"
+         y="32.432793">Controllers</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="20.30278"
+       y="41.70895"
+       id="text24104-9"
+       transform="rotate(-30)"><tspan
+         sodipodi:role="line"
+         id="tspan24102-6"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="20.30278"
+         y="41.70895">Devices</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="-19.996677"
+       y="100.05262"
+       id="text24104-6"
+       transform="rotate(-60)"><tspan
+         sodipodi:role="line"
+         id="tspan24102-2"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="-19.996677"
+         y="100.05262">Presenters</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="73.781998"
+       y="4.8817849"
+       id="text25100"
+       transform="rotate(60)"><tspan
+         sodipodi:role="line"
+         id="tspan25098"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="73.781998"
+         y="4.8817849">Gateways</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="77.209335"
+       y="-13.268719"
+       id="text26939"
+       transform="rotate(30)"><tspan
+         sodipodi:role="line"
+         id="tspan26937"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="77.209335"
+         y="-13.268719">Web</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="72.327644"
+       y="15.571904"
+       id="text27285"
+       transform="rotate(60)"><tspan
+         sodipodi:role="line"
+         id="tspan27283"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="72.327644"
+         y="15.571904">DB</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="-19.013363"
+       y="110.83582"
+       id="text28447"
+       transform="rotate(-60)"><tspan
+         sodipodi:role="line"
+         id="tspan28445"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="-19.013363"
+         y="110.83582">UI</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="56.013458"
+       y="88.340378"
+       id="text28751"><tspan
+         sodipodi:role="line"
+         id="tspan28749"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="56.013458"
+         y="88.340378">External</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52778px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="56.013458"
+         y="91.868156"
+         id="tspan28997">interfaces</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Onion"
+     sodipodi:insensitive="true">
+    <circle
+       style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1532-8-8"
+       cx="157.93718"
+       cy="57.193195"
+       r="39.75" />
+    <circle
+       style="fill:#8f3d3d;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1532-3"
+       cx="157.93718"
+       cy="57.193192"
+       r="29.75" />
+    <circle
+       style="fill:#a3a329;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle1366-8"
+       cx="157.93718"
+       cy="57.193192"
+       r="19.75" />
+    <circle
+       style="fill:#a3a329;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path870-3"
+       cx="157.93718"
+       cy="57.193192"
+       r="9.75" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="157.83391"
+       y="56.33456"
+       id="text10994-4"><tspan
+         sodipodi:role="line"
+         id="tspan10992-6"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="157.83391"
+         y="56.33456">Domain</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="157.83391"
+         y="59.15678"
+         id="tspan47719">Model</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="158.0632"
+       y="42.204624"
+       id="text22382-0"><tspan
+         sodipodi:role="line"
+         id="tspan22380-7"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="158.0632"
+         y="42.204624">Domain</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="158.0632"
+         y="45.026844"
+         id="tspan48915">services</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="157.90158"
+       y="34.625984"
+       id="text24104-92"><tspan
+         sodipodi:role="line"
+         id="tspan24102-3"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="157.90158"
+         y="34.625984">Controllers</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="29.996521"
+       y="190.50505"
+       id="text24104-6-9"
+       transform="rotate(-60)"><tspan
+         sodipodi:role="line"
+         id="tspan24102-2-7"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="29.996521"
+         y="190.50505">Presenters</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="127.14994"
+       y="-83.167824"
+       id="text25100-8"
+       transform="rotate(60)"><tspan
+         sodipodi:role="line"
+         id="tspan25098-3"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="127.14994"
+         y="-83.167824">Gateways</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="125.69558"
+       y="-72.477707"
+       id="text27285-3"
+       transform="rotate(60)"><tspan
+         sodipodi:role="line"
+         id="tspan27283-5"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="125.69558"
+         y="-72.477707">Tests</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="30.555866"
+       y="201.07863"
+       id="text28447-9"
+       transform="rotate(-60)"><tspan
+         sodipodi:role="line"
+         id="tspan28445-1"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="30.555866"
+         y="201.07863">Infrastructure</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="158.03276"
+       y="24.000643"
+       id="text49965"><tspan
+         sodipodi:role="line"
+         id="tspan49963"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="158.03276"
+         y="24.000643">User interface</tspan></text>
+  </g>
+</svg>

@@ -182,7 +182,7 @@ Reducción en el precio total del carrito aplicada mediante un cupón válido. E
 **Tipos de cupón:**
 
 1. **Cupón Porcentual:** Descuento basado en un porcentaje del total (ej: 10%, 25%)
-2. **Cupón de Monto Fijo:** Descuento de una cantidad específica (ej: $50, $100)
+2. **Cupón de Monto Fijo:** Descuento de una cantidad específica (ej: \$50, \$100)
 
 **Comportamiento esperado:**
 
@@ -279,7 +279,7 @@ Los cupones deben validarse antes de aplicarse:
 
 - El descuento nunca puede ser mayor al subtotal del carrito
 - Si un cupón de monto fijo excede el subtotal, el descuento se ajusta al monto del subtotal
-- El total final nunca puede ser negativo (mínimo $0)
+- El total final nunca puede ser negativo (mínimo \$0)
 
 ### RN-10: Recálculo Automático
 
@@ -317,19 +317,19 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 
 | ID  | Nombre  | Precio de Referencia |
 | --- | ------- | -------------------- |
-| p1  | Laptop  | $1,000               |
-| p2  | Mouse   | $25                  |
-| p3  | Teclado | $75                  |
+| p1  | Laptop  | \$1,000              |
+| p2  | Mouse   | \$25                 |
+| p3  | Teclado | \$75                 |
 
 ### Cupones de Prueba
 
 | Código        | Tipo       | Valor | Monto Mínimo | Estado   |
 | ------------- | ---------- | ----- | ------------ | -------- |
-| DESCUENTO10   | Porcentual | 10%   | $0           | Activo   |
-| DESCUENTO20   | Porcentual | 20%   | $500         | Activo   |
-| VERANO50      | Monto Fijo | $50   | $200         | Activo   |
-| PRIMERACOMPRA | Monto Fijo | $100  | $300         | Activo   |
-| VERANO98      | Porcentual | 15%   | $0           | Inactivo |
+| DESCUENTO10   | Porcentual | 10%   | \$0          | Activo   |
+| DESCUENTO20   | Porcentual | 20%   | \$500        | Activo   |
+| VERANO50      | Monto Fijo | \$50  | \$200        | Activo   |
+| PRIMERACOMPRA | Monto Fijo | \$100 | \$300        | Activo   |
+| VERANO98      | Porcentual | 15%   | \$0          | Inactivo |
 
 ---
 
@@ -370,36 +370,36 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 
 ### Escenario 4: Uso de Cupón Porcentual
 
-1. Cliente c1 tiene un carrito con 2 Laptops (p1) = $2,000
+1. Cliente c1 tiene un carrito con 2 Laptops (p1) = \$2,000
 2. Ingresa el cupón "DESCUENTO10" (10% de descuento)
 3. Sistema valida el cupón
-4. Se aplica descuento de $200 (10% de $2,000)
-5. Consulta su carrito y ve: Subtotal $2,000, Descuento -$200, Total $1,800
+4. Se aplica descuento de \$200 (10% de \$2,000)
+5. Consulta su carrito y ve: Subtotal \$2,000, Descuento -\$200, Total \$1,800
 
-**Resultado:** El cliente paga $1,800 en lugar de $2,000
+**Resultado:** El cliente paga \$1,800 en lugar de \$2,000
 
 ---
 
 ### Escenario 5: Uso de Cupón de Monto Fijo
 
-1. Cliente c2 tiene un carrito con 1 Laptop (p1) y 1 Mouse (p2) = $1,025
-2. Ingresa el cupón "VERANO50" ($50 de descuento, mínimo $200)
+1. Cliente c2 tiene un carrito con 1 Laptop (p1) y 1 Mouse (p2) = \$1,025
+2. Ingresa el cupón "VERANO50" (\$50 de descuento, mínimo \$200)
 3. Sistema valida que cumple el monto mínimo
-4. Se aplica descuento de $50
-5. Total final: $975
+4. Se aplica descuento de \$50
+5. Total final: \$975
 
-**Resultado:** El cliente ahorra $50 en su compra
+**Resultado:** El cliente ahorra \$50 en su compra
 
 ---
 
 ### Escenario 6: Cupón Rechazado por Monto Mínimo
 
-1. Cliente c3 tiene un carrito con 1 Mouse (p2) = $25
-2. Intenta aplicar cupón "PRIMERACOMPRA" ($100 descuento, mínimo $300)
-3. Sistema rechaza el cupón porque el subtotal ($25) no alcanza el mínimo ($300)
-4. Se muestra mensaje: "El carrito debe tener un mínimo de $300 para usar este cupón"
+1. Cliente c3 tiene un carrito con 1 Mouse (p2) = \$25
+2. Intenta aplicar cupón "PRIMERACOMPRA" (\$100 descuento, mínimo \$300)
+3. Sistema rechaza el cupón porque el subtotal (\$25) no alcanza el mínimo (\$300)
+4. Se muestra mensaje: "El carrito debe tener un mínimo de \$300 para usar este cupón"
 
-**Resultado:** El cupón no se aplica y el total permanece en $25
+**Resultado:** El cupón no se aplica y el total permanece en \$25
 
 ---
 
