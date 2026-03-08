@@ -132,10 +132,6 @@ npm run clean:all
 #### Clean Architecture ✅
 
 - 📖 [README](./clean-architecture/README.md) - Documentación del proyecto
-- 📋 [API.md](./clean-architecture/API.md) - Documentación de endpoints
-- 🧪 [TESTING.md](./clean-architecture/TESTING.md) - Guía de testing
-- 📊 [CLEAN_ARCHITECTURE_REPORT.md](./CLEAN_ARCHITECTURE_REPORT.md) - Análisis detallado
-- 🧪 [api-tests.http](./clean-architecture/api-tests.http) - 34 tests HTTP ejecutables
 
 #### Onion Architecture 🔄
 
