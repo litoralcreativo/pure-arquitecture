@@ -1,13 +1,11 @@
 /**
- * PurchaseItem - Línea individual de una compra
+ * Purchase item entity representing a product line in a completed purchase.
+ * Immutable snapshot of what the customer purchased.
  *
- * Representa un producto específico dentro de una compra completada.
- * Es un snapshot inmutable de lo que el cliente compró.
- *
- * Reglas de negocio:
- * - La cantidad debe ser mayor a 0
- * - El precio debe ser mayor a 0
- * - El subtotal se calcula como cantidad × precio
+ * Business Rules:
+ * - Quantity must be greater than 0
+ * - Unit price cannot be negative
+ * - Subtotal = quantity × unit price
  */
 export class PurchaseItem {
   constructor(
@@ -25,14 +23,16 @@ export class PurchaseItem {
   }
 
   /**
-   * Calcula el subtotal de este item (cantidad × precio unitario)
+   * Calculates the subtotal for this item.
+   * @returns quantity × unit price
    */
   public getSubtotal(): number {
     return this.quantity * this.unitPrice;
   }
 
   /**
-   * Obtiene una representación plana del item para serialización
+   * Serializes the item for storage or transmission.
+   * @returns Plain object representation
    */
   public toJSON() {
     return {
