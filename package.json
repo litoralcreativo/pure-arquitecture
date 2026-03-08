@@ -1,0 +1,38 @@
+{
+  "name": "pure-architectures",
+  "version": "1.0.0",
+  "description": "Proyecto comparativo de arquitecturas puras: Clean, Onion y Hexagonal",
+  "private": true,
+  "workspaces": [
+    "clean-architecture",
+    "onion-architecture",
+    "hexagonal-architecture"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --workspace=clean-architecture && npm install --workspace=onion-architecture && npm install --workspace=hexagonal-architecture",
+    "build:all": "npm run build --workspaces --if-present",
+    "test:all": "npm run test --workspaces --if-present",
+    "clean:all": "npm run clean --workspaces --if-present && rimraf node_modules",
+    "dev:clean": "npm run dev --workspace=clean-architecture",
+    "dev:onion": "npm run dev --workspace=onion-architecture",
+    "dev:hexagonal": "npm run dev --workspace=hexagonal-architecture",
+    "lint:all": "npm run lint --workspaces --if-present"
+  },
+  "keywords": [
+    "clean-architecture",
+    "onion-architecture",
+    "hexagonal-architecture",
+    "ports-and-adapters",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
