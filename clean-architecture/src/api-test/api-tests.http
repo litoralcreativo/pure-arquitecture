@@ -773,3 +773,382 @@ GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
 GET {{baseUrl}}/cart/c3 HTTP/1.1
 
 ###
+
+###############################################
+# Tests de Checkout y Purchases (Compras)
+###############################################
+
+### 78. Error - Checkout de Carrito Vacío
+# Intentar hacer checkout con el carrito vacío de c1 (si lo limpiamos antes)
+# Primero asegurarnos de que c1 está vacío
+DELETE {{baseUrl}}/cart/remove-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 79. Verificar c1 vacío
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 80. Error - Checkout de Carrito Vacío (debe fallar)
+# Esperado: error "Cannot checkout an empty cart"
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 81. Preparar carrito c1 para checkout exitoso
+# Agregar 2 Laptops (p1) y 1 Mouse (p2)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 82. Agregar segunda Laptop a c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 83. Agregar Mouse a c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 84. Aplicar cupón 10% a c1 antes del checkout
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "couponCode": "{{coupon10}}"
+}
+
+###
+
+### 85. Ver carrito c1 antes del checkout
+# Esperado: p1 x2 ($2000) + p2 ($25) = $2025
+# Descuento: 10% = $202.50
+# Total: $1822.50
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 86. Checkout Exitoso de c1 (Primera Compra)
+# Debe crear una Purchase y vaciar el carrito
+# Guardar el purchaseId de la respuesta para tests posteriores
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 87. Verificar que carrito c1 quedó vacío después del checkout
+# Esperado: carrito vacío o no encontrado
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 88. Consultar Historial de Compras de c1
+# Debe mostrar la compra recién creada
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+### 89. Preparar segunda compra para c1
+# Crear nuevo carrito y agregar productos
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 90. Agregar p1 para segunda compra de c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 91. Agregar p2 para segunda compra de c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 92. Ver carrito c1 antes de segundo checkout
+# Esperado: p1 x1 ($1000) + p2 x1 ($25) = $1025, sin cupón
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 93. Segundo Checkout de c1 (sin cupón)
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 94. Consultar Historial de c1 (debe tener 2 compras)
+# Las compras deben estar ordenadas por fecha descendente (más reciente primero)
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+### 95. Checkout de c2 (con cupón aplicado)
+# c2 actualmente tiene p1 x1 + p2 x1 con cupón DESCUENTO20
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 96. Checkout de c2
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}"
+}
+
+###
+
+### 97. Verificar carrito c2 vacío
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 98. Consultar Historial de c2 (debe tener 1 compra)
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+### 99. Checkout de c3 (carrito pequeño sin cupón)
+# c3 tiene p2 x1 ($25)
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3"
+}
+
+###
+
+### 100. Consultar Historial de c3
+GET {{baseUrl}}/purchases/history/c3 HTTP/1.1
+
+###
+
+###############################################
+# Tests de Consulta de Detalle de Purchase
+###############################################
+
+### 101. Consultar Detalle de Purchase Específica
+# Reemplazar {purchaseId} con un ID real del historial
+# Ejemplo: GET {{baseUrl}}/purchases/pur-1234567890/customer/c1
+# Por ahora, este test fallará hasta que se obtenga un purchaseId real
+GET {{baseUrl}}/purchases/pur-example-id/customer/{{customerId1}} HTTP/1.1
+
+###
+
+### 102. Error - Consultar Purchase Inexistente
+GET {{baseUrl}}/purchases/pur-99999/customer/{{customerId1}} HTTP/1.1
+
+###
+
+### 103. Error - Purchase de Otro Cliente (validación de propiedad)
+# Intentar que c2 acceda a una purchase de c1
+# Reemplazar {purchaseId-de-c1} con un ID real de c1
+GET {{baseUrl}}/purchases/pur-example-id/customer/{{customerId2}} HTTP/1.1
+
+###
+
+###############################################
+# Flujo Completo: Checkout con Múltiples Compras
+###############################################
+
+### 104. Crear tercer carrito para c1
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 105. Agregar múltiples productos a c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 106. Incrementar p1 en c1
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 107. Incrementar p1 nuevamente en c1
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 108. Agregar p2 a c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 109. Incrementar p2 en c1
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 110. Aplicar cupón de monto fijo $100
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "couponCode": "{{couponFixed100}}"
+}
+
+###
+
+### 111. Ver carrito final de c1 antes de checkout
+# Esperado: p1 x3 ($3000) + p2 x2 ($50) = $3050
+# Descuento: $100 fijo
+# Total: $2950
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 112. Tercer Checkout de c1
+POST {{baseUrl}}/checkout HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 113. Historial Final de c1 (debe tener 3 compras)
+# Ordenadas por fecha descendente
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+###############################################
+# Verificación de Aislamiento de Purchases
+###############################################
+
+### 114. Verificar que c2 solo ve su historial (1 compra)
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+### 115. Verificar que c3 solo ve su historial (1 compra)
+GET {{baseUrl}}/purchases/history/c3 HTTP/1.1
+
+###
+
+### 116. Cliente sin compras (c4 - nunca existió)
+GET {{baseUrl}}/purchases/history/c4 HTTP/1.1
+
+###
+
+###############################################
+# Resumen Final del Sistema
+###############################################
+
+### 117. Resumen - Total de compras en el sistema
+# c1: 3 compras
+# c2: 1 compra
+# c3: 1 compra
+# Total: 5 purchases creadas
+
+# Historial c1
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+# Historial c2
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+# Historial c3
+GET {{baseUrl}}/purchases/history/c3 HTTP/1.1
+
+###

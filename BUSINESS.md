@@ -18,13 +18,18 @@ Necesitamos un sistema que permita a nuestros clientes gestionar su carrito de c
 - ✅ Gestión del carrito de compras
 - ✅ Consulta de productos en el carrito
 - ✅ Cálculo automático de totales
+- ✅ Sistema de cupones de descuento
+- ✅ Proceso de checkout (finalización de compra)
+- ✅ Historial de compras realizadas
 
 **Fuera del alcance (futuras fases):**
 
-- ❌ Proceso de pago
+- ❌ Proceso de pago con pasarela
 - ❌ Gestión de inventario
 - ❌ Seguimiento de envíos
 - ❌ Sistema de usuarios y autenticación completa
+- ❌ Cancelación de compras
+- ❌ Reembolsos
 
 ---
 
@@ -57,6 +62,18 @@ Código promocional que el cliente puede ingresar para obtener un descuento en s
 ### Descuento
 
 Reducción en el precio total del carrito aplicada mediante un cupón válido. El descuento se calcula sobre el subtotal antes de mostrar el total final.
+
+### Checkout (Finalización de Compra)
+
+Proceso mediante el cual el cliente confirma su intención de compra. Al hacer checkout, el contenido del carrito se convierte en una orden de compra (Purchase) permanente.
+
+### Compra / Orden (Purchase/Order)
+
+Registro permanente e inmutable de una transacción completada. Representa un snapshot del carrito en el momento del checkout, incluyendo todos los productos, precios, descuentos y total pagado.
+
+### Estado de Compra (Purchase Status)
+
+Indicador del estado actual de una compra. En esta fase solo manejamos estados simples: completada o pendiente.
 
 ---
 
@@ -230,6 +247,110 @@ Reducción en el precio total del carrito aplicada mediante un cupón válido. E
 
 ---
 
+### RF-9: Realizar Checkout (Finalizar Compra)
+
+**Descripción:** El cliente confirma su intención de compra y convierte su carrito en una orden de compra permanente.
+
+**Comportamiento esperado:**
+
+1. Validar que el carrito no esté vacío
+2. Crear una orden de compra (Purchase) con:
+   - Snapshot de todos los productos con sus cantidades y precios
+   - Subtotal, descuento (si aplica) y total
+   - Información del cupón usado (si aplica)
+   - Fecha y hora de la compra
+   - Estado inicial: "completed"
+3. Vaciar el carrito del cliente (prepararlo para nueva compra)
+4. Retornar confirmación con ID de la compra y detalles
+
+**Información capturada en la Purchase:**
+
+- ID único de la compra
+- ID del cliente
+- Lista de productos comprados (con nombre, cantidad, precio unitario)
+- Subtotal de la compra
+- Descuento aplicado
+- Total pagado
+- Código de cupón usado (si aplica)
+- Fecha y hora de creación
+- Estado de la compra
+
+**Condiciones:**
+
+- El carrito debe tener al menos un producto
+- El cliente debe tener un carrito activo
+- Los precios capturados en el carrito se mantienen en la Purchase
+
+**Resultado esperado:**
+
+- Purchase creada y almacenada permanentemente
+- Carrito vaciado (listo para nueva compra)
+- Cliente recibe confirmación con:
+  - ID de la compra
+  - Resumen de items
+  - Total pagado
+  - Mensaje de éxito
+
+---
+
+### RF-10: Consultar Historial de Compras
+
+**Descripción:** El cliente puede ver todas las compras que ha realizado previamente en el sistema.
+
+**Comportamiento esperado:**
+
+- Recuperar todas las compras (Purchases) del cliente
+- Ordenar por fecha descendente (más reciente primero)
+- Mostrar información resumida de cada compra
+
+**Información a mostrar por compra:**
+
+- ID de la compra
+- Fecha de la compra
+- Cantidad total de items
+- Total pagado
+- Estado de la compra
+- Cupón usado (si aplica)
+
+**Condiciones:**
+
+- El cliente debe estar registrado en el sistema
+- Si no tiene compras, mostrar mensaje apropiado
+
+---
+
+### RF-11: Consultar Detalle de una Compra
+
+**Descripción:** El cliente puede ver el detalle completo de una compra específica que realizó.
+
+**Comportamiento esperado:**
+
+- Recuperar la compra por su ID
+- Validar que la compra pertenece al cliente solicitante
+- Mostrar información completa
+
+**Información detallada a mostrar:**
+
+- ID de la compra
+- Fecha y hora de la compra
+- Lista completa de productos:
+  - Nombre del producto
+  - Cantidad
+  - Precio unitario
+  - Subtotal por producto
+- Subtotal de la compra
+- Descuento aplicado (si aplica)
+- Cupón usado (si aplica)
+- Total pagado
+- Estado de la compra
+
+**Condiciones:**
+
+- La compra debe existir en el sistema
+- La compra debe pertenecer al cliente que la consulta
+
+---
+
 ## 📐 Reglas de Negocio
 
 ### RN-1: Unicidad del Carrito
@@ -284,6 +405,30 @@ Los cupones deben validarse antes de aplicarse:
 ### RN-10: Recálculo Automático
 
 Cuando se aplica o remueve un cupón, todos los totales deben recalcularse automáticamente. Los cambios en el carrito (agregar/remover productos) también deben recalcular el descuento.
+
+### RN-11: Checkout Requiere Carrito No Vacío
+
+No se puede realizar checkout de un carrito vacío. El sistema debe validar que exista al menos un producto en el carrito antes de crear una Purchase.
+
+### RN-12: Purchase es Inmutable
+
+Una vez creada una compra (Purchase), esta no puede modificarse. Es un registro histórico permanente que refleja exactamente lo que el cliente compró en ese momento.
+
+### RN-13: Snapshot de Precios en Purchase
+
+La Purchase captura los precios exactos que tenía el carrito en el momento del checkout. Estos precios NO cambian aunque el catálogo actualice sus precios posteriormente.
+
+### RN-14: Carrito se Vacía después del Checkout
+
+Después de un checkout exitoso, el carrito del cliente queda vacío automáticamente, listo para iniciar una nueva compra.
+
+### RN-15: Aislamiento de Compras
+
+Las compras de diferentes clientes son completamente independientes. Un cliente solo puede consultar sus propias compras, no las de otros clientes.
+
+### RN-16: Unicidad de Purchase ID
+
+Cada compra debe tener un identificador único que permita consultarla posteriormente de manera inequívoca.
 
 ---
 
@@ -415,14 +560,116 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 
 ---
 
+### Escenario 8: Checkout Exitoso
+
+1. Cliente c1 tiene un carrito con:
+   - 2x Laptop (p1) @ $1000 = $2000
+   - 1x Mouse (p2) @ $25 = $25
+   - Cupón DESCUENTO10 aplicado
+   - Subtotal: $2025, Descuento: $202.50, Total: $1822.50
+2. Cliente ejecuta checkout
+3. Sistema crea Purchase con ID "pur-001"
+4. Sistema captura snapshot completo del carrito
+5. Sistema vacía el carrito de c1
+6. Cliente recibe confirmación:
+   - "Compra realizada exitosamente"
+   - Purchase ID: pur-001
+   - Total pagado: $1822.50
+
+**Resultado:**
+
+- Purchase pur-001 creada y almacenada
+- Carrito de c1 vacío (listo para nueva compra)
+
+---
+
+### Escenario 9: Error al Hacer Checkout de Carrito Vacío
+
+1. Cliente c2 tiene un carrito vacío
+2. Intenta hacer checkout
+3. Sistema rechaza la operación
+4. Se muestra mensaje: "No se puede hacer checkout de un carrito vacío"
+
+**Resultado:** No se crea Purchase, carrito permanece vacío
+
+---
+
+### Escenario 10: Consultar Historial de Compras
+
+1. Cliente c1 ya realizó 2 compras anteriormente:
+   - Purchase pur-001: 8 marzo 2026, Total $1822.50
+   - Purchase pur-002: 7 marzo 2026, Total $950.00
+2. Cliente consulta su historial
+3. Sistema muestra lista ordenada por fecha descendente:
+   ```
+   [
+     { id: "pur-001", date: "2026-03-08", items: 3, total: $1822.50 },
+     { id: "pur-002", date: "2026-03-07", items: 2, total: $950.00 }
+   ]
+   ```
+
+**Resultado:** Cliente ve todas sus compras, más reciente primero
+
+---
+
+### Escenario 11: Consultar Detalle de Compra Específica
+
+1. Cliente c1 consulta detalle de purchase "pur-001"
+2. Sistema muestra información completa:
+
+   ```
+   Purchase ID: pur-001
+   Fecha: 8 marzo 2026, 10:30 AM
+   Cliente: c1
+
+   Productos:
+   - Laptop x2 @ $1000 = $2000
+   - Mouse x1 @ $25 = $25
+
+   Subtotal: $2025
+   Cupón: DESCUENTO10 (-$202.50)
+   Total Pagado: $1822.50
+   Estado: Completed
+   ```
+
+**Resultado:** Cliente ve todos los detalles de su compra histórica
+
+---
+
+### Escenario 12: Flujo Completo de Compra
+
+1. Cliente c2 crea nuevo carrito
+2. Agrega 1x Teclado (p3) @ $75
+3. Agrega 1x Mouse (p2) @ $25
+4. Consulta carrito: Subtotal $100, Total $100
+5. Aplica cupón VERANO50 (descuento $50, mínimo $200)
+6. Sistema rechaza cupón (no cumple mínimo)
+7. Cliente agrega 2x Mouse más (ahora tiene 3x Mouse)
+8. Consulta carrito: Subtotal $150, Total $150
+9. Cliente agrega 1x Teclado más (ahora tiene 2x Teclado)
+10. Consulta carrito: Subtotal $225, Total $225
+11. Aplica cupón VERANO50 nuevamente
+12. Sistema acepta cupón: Subtotal $225, Descuento $50, Total $175
+13. Cliente hace checkout
+14. Sistema crea Purchase pur-003
+15. Carrito queda vacío
+16. Cliente consulta historial y ve su nueva compra
+
+**Resultado:** Compra completada exitosamente, carrito listo para nueva compra
+
+---
+
 ## ⚠️ Restricciones y Supuestos
 
 ### Restricciones Actuales
 
 - No se valida disponibilidad de stock
 - No hay límite de cantidad por producto
-- No hay validación de montos mínimos o máximos
-- No se implementa proceso de pago
+- No hay validación de montos mínimos o máximos de compra
+- No se implementa pasarela de pago real
+- No se permite cancelación de compras
+- No se gestionan reembolsos
+- No hay seguimiento de estados complejos (enviado, entregado, etc.)
 
 ### Supuestos
 
@@ -430,6 +677,8 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 - Los productos ya existen en el catálogo
 - Existe un servicio que provee los precios
 - La persistencia de datos es temporal (para esta fase)
+- El checkout es automático (no requiere confirmación de pago)
+- Las compras se marcan como "completadas" inmediatamente
 
 ---
 
@@ -487,6 +736,41 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 - ✅ Se recalcula el total sin descuento
 - ✅ El carrito vuelve a mostrar el subtotal como total
 
+### Para Realizar Checkout
+
+- ✅ Se valida que el carrito no esté vacío
+- ✅ Se crea una Purchase con todos los datos del carrito
+- ✅ La Purchase captura snapshot exacto del carrito (productos, precios, descuentos)
+- ✅ Se genera un ID único para la Purchase
+- ✅ La Purchase se marca como "completed"
+- ✅ El carrito se vacía automáticamente después del checkout
+- ✅ Se retorna confirmación con ID de compra y total pagado
+- ✅ No se puede hacer checkout de carrito vacío
+
+### Para Consultar Historial de Compras
+
+- ✅ Se muestran todas las compras del cliente
+- ✅ Las compras están ordenadas por fecha descendente
+- ✅ Cada compra muestra: ID, fecha, cantidad de items, total
+- ✅ Se muestra mensaje apropiado si no hay compras
+- ✅ Un cliente solo ve sus propias compras
+
+### Para Consultar Detalle de Compra
+
+- ✅ Se muestra información completa de la compra
+- ✅ Se valida que la compra existe
+- ✅ Se valida que la compra pertenece al cliente
+- ✅ Se muestran todos los productos con cantidades y precios
+- ✅ Se muestra el subtotal, descuento y total
+- ✅ Se muestra el cupón usado (si aplica)
+- ✅ Se muestra la fecha de la compra
+
+### Para Inmutabilidad de Purchase
+
+- ✅ Una Purchase creada no puede modificarse
+- ✅ Los precios en la Purchase no cambian aunque el catálogo cambie
+- ✅ La Purchase es un registro histórico permanente
+
 ### Para Cálculos con Descuento
 
 - ✅ Subtotal = Suma de (cantidad × precio) de todos los productos
@@ -499,5 +783,16 @@ El sistema debe validar los cupones ingresados por los clientes. Debe verificar 
 
 **Documento preparado por:** Área de Producto  
 **Fecha:** 8 de marzo de 2026  
-**Versión:** 1.0  
+**Versión:** 2.0  
+**Última actualización:** 8 de marzo de 2026  
 **Estado:** Aprobado para desarrollo
+
+**Cambios en v2.0:**
+
+- ✅ Agregado proceso de Checkout (RF-9)
+- ✅ Agregado consulta de Historial de Compras (RF-10)
+- ✅ Agregado consulta de Detalle de Compra (RF-11)
+- ✅ Nuevas entidades: Purchase, PurchaseItem, PurchaseStatus
+- ✅ Nuevas reglas de negocio: RN-11 a RN-16
+- ✅ 5 nuevos escenarios de uso (8-12)
+- ✅ Criterios de aceptación para checkout y compras

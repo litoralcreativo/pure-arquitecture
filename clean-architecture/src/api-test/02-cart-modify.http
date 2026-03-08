@@ -1,0 +1,67 @@
+### Variables
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+@productId1 = p1
+@productId2 = p2
+
+###############################################
+# Cart - Modificar Cantidades y Productos
+# Tests: 29-34
+###############################################
+
+### 29. Incrementar p2 en carrito de c2
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 30. Incrementar p2 nuevamente en carrito de c2
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 31. Ver Carrito Final de c2 con Totales
+# Debería mostrar p1 (cant: 2) y p2 (cant: 3)
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 32. Resumen - Ver ambos carritos
+
+# Carrito de c1 (solo p2)
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+# Carrito de c2 (p1 x2 y p2 x3)
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 33. Decrementar p2 en c1 hasta eliminarlo
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 34. Verificar que p2 fue eliminado de c1 (carrito vacío)
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###

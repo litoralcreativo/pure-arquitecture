@@ -1,0 +1,202 @@
+### Variables
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+@productId1 = p1
+@productId2 = p2
+
+###############################################
+# Cart - Operaciones Básicas
+# Tests: 1-21
+###############################################
+
+### 1. Crear Carrito para Cliente 1
+# Crea un nuevo carrito para el cliente c1
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 2. Obtener Carrito (Vacío)
+# Obtiene el carrito actual - debería estar vacío o no existir aún
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 3. Agregar Producto p1 al Carrito (Primera vez)
+# Agrega el producto p1 al carrito de c1
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 4. Obtener Carrito (Con 1 producto)
+# Debería mostrar p1 con cantidad 1
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 5. Agregar el Mismo Producto p1 (Segunda vez)
+# Incrementa la cantidad del producto p1 existente
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 6. Obtener Carrito (Con cantidad 2 de p1)
+# Debería mostrar p1 con cantidad 2
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 7. Agregar Producto p2
+# Agrega un segundo producto diferente
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 8. Obtener Carrito (Con 2 productos: p1 y p2)
+# Debería mostrar p1 (cant: 2) y p2 (cant: 1)
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 9. Incrementar Cantidad de p1
+# Incrementa la cantidad de p1 (de 2 a 3)
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 10. Obtener Carrito (Después de incrementar p1)
+# Debería mostrar p1 (cant: 3) y p2 (cant: 1)
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 11. Decrementar Cantidad de p1
+# Decrementa la cantidad de p1 (de 3 a 2)
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 12. Obtener Carrito (Después de decrementar p1)
+# Debería mostrar p1 (cant: 2) y p2 (cant: 1)
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 13. Remover Producto p1 del Carrito
+# Elimina completamente el producto p1
+DELETE {{baseUrl}}/cart/remove-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 14. Obtener Carrito Final de c1
+# Debería mostrar solo p2 con cantidad 1
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+###############################################
+# Tests con Cliente 2 (c2)
+###############################################
+
+### 15. Crear Carrito para Cliente 2 (c2)
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}"
+}
+
+###
+
+### 16. Agregar Producto p1 al Carrito de c2
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 17. Agregar Producto p2 al Carrito de c2
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 18. Obtener Carrito del Cliente 2 (c2)
+# Debería mostrar p1 y p2, ambos con cantidad 1
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 19. Verificar Aislamiento - Obtener Carrito de c1
+# El carrito de c1 debe tener solo p2
+# El carrito de c2 debe tener p1 y p2
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 20. Incrementar p1 en el carrito de c2
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 21. Obtener Carrito de c2 (con p1 incrementado)
+# Debería mostrar p1 (cant: 2) y p2 (cant: 1)
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###

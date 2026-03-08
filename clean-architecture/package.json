@@ -10,8 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:api": "httpyac api-tests.http --all",
-    "test:api:verbose": "httpyac api-tests.http --all --output short",
+    "test:api": "httpyac src/api-test/*.http --all",
+    "test:api:verbose": "httpyac src/api-test/*.http --all --output short",
     "lint": "eslint src --ext .ts",
     "clean": "rimraf dist"
   },

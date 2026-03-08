@@ -1,0 +1,187 @@
+### Variables
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+@productId1 = p1
+@productId2 = p2
+@coupon20 = DESCUENTO20
+
+###############################################
+# Cupones - Escenarios Complejos
+# Tests: 59-77
+###############################################
+
+### 59. Limpiar carrito c2 antes de escenarios complejos
+# c2 actualmente tiene p1 x2 y p2 x3 de tests anteriores
+# Vamos a limpiar para empezar fresh
+DELETE {{baseUrl}}/cart/remove-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 60. Remover segundo p1 de c2
+DELETE {{baseUrl}}/cart/remove-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 61. Decrementar p2 de c2 (3 veces para eliminarlo)
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 62. Decrementar p2 de c2 segunda vez
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 63. Decrementar p2 de c2 tercera vez (elimina)
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 64. Verificar c2 vacío
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 65. Agregar p2 a c2 para empezar escenario ($25)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 66. Ver carrito de c2 inicial ($25)
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 67. Agregar p1 a c2 para alcanzar mínimo
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 68. Ver carrito de c2 (ahora con $1025)
+# p1 (Laptop $1000) + p2 (Mouse $25) = $1025
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 69. Aplicar cupón 20% ahora que cumple mínimo
+# Mínimo: $500 ✓ (cumple con $1025)
+# Descuento: 20% de $1025 = $205
+# Total esperado: $820
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "couponCode": "{{coupon20}}"
+}
+
+###
+
+### 70. Ver carrito de c2 con cupón 20%
+# Esperado: subtotal: $1025, discount: $205, total: $820
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 71. Agregar más productos (el cupón debe seguir aplicado)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 72. Ver carrito de c2 después de agregar producto
+# p1 x2 ($2000) + p2 ($25) = $2025
+# Descuento: 20% de $2025 = $405
+# Total: $1620
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 73. Decrementar producto (el cupón debe recalcularse)
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId2}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 74. Ver carrito después de decrementar (cupón recalculado)
+# p1 ($1000) + p2 ($25) = $1025
+# Descuento: 20% de $1025 = $205
+# Total: $820
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+###############################################
+# Resumen Final con Cupones
+###############################################
+
+### 75. Estado Final - Carrito c1 con cupón PRIMERACOMPRA
+# Esperado: p1 x2, subtotal: $2000, discount: $100, total: $1900
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 76. Estado Final - Carrito c2 con cupón DESCUENTO20
+# Esperado: p1 x1 + p2 x1, subtotal: $1025, discount: $205, total: $820
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 77. Estado Final - Carrito c3 pequeño sin cupón
+# Esperado: p2 x1, subtotal: $25, discount: $0, total: $25
+GET {{baseUrl}}/cart/c3 HTTP/1.1
+
+###

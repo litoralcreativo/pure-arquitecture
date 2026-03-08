@@ -22,9 +22,19 @@ import { ApplyCouponPresenter } from "@interface-adapters/presenters/apply-coupo
 import { RemoveCouponUseCase } from "@usecases/use-cases/remove-coupon/remove-coupon.usecase";
 import { RemoveCouponController } from "@interface-adapters/controllers/remove-coupon.controller";
 import { RemoveCouponPresenter } from "@interface-adapters/presenters/remove-coupon.presenter";
+import { CheckoutCartUseCase } from "@usecases/use-cases/checkout-cart/checkout-cart.usecase";
+import { CheckoutCartController } from "@interface-adapters/controllers/checkout-cart.controller";
+import { CheckoutCartPresenter } from "@interface-adapters/presenters/checkout-cart.presenter";
+import { GetPurchaseHistoryUseCase } from "@usecases/use-cases/get-purchase-history/get-purchase-history.usecase";
+import { GetPurchaseHistoryController } from "@interface-adapters/controllers/get-purchase-history.controller";
+import { GetPurchaseHistoryPresenter } from "@interface-adapters/presenters/get-purchase-history.presenter";
+import { GetPurchaseByIdUseCase } from "@usecases/use-cases/get-purchase-by-id/get-purchase-by-id.usecase";
+import { GetPurchaseByIdController } from "@interface-adapters/controllers/get-purchase-by-id.controller";
+import { GetPurchaseByIdPresenter } from "@interface-adapters/presenters/get-purchase-by-id.presenter";
 import { InMemoryCartRepository } from "@frameworks-and-drivers/persistence/in-memory/cart.repository.impl";
 import { InMemoryCustomerRepository } from "@frameworks-and-drivers/persistence/in-memory/customer.repository.impl";
 import { InMemoryCouponRepository } from "@frameworks-and-drivers/persistence/in-memory/coupon.repository.impl";
+import { InMemoryPurchaseRepository } from "@frameworks-and-drivers/persistence/in-memory/purchase.repository.impl";
 import { createRouter } from "@frameworks-and-drivers/web/express-router";
 import { buildRoutes } from "@frameworks-and-drivers/web/routes";
 import { createServer } from "@frameworks-and-drivers/web/express-server";
@@ -37,6 +47,7 @@ const cartRepository = new InMemoryCartRepository();
 const productRepository = new InMemoryProductRepository();
 const customerRepository = new InMemoryCustomerRepository();
 const couponRepository = new InMemoryCouponRepository();
+const purchaseRepository = new InMemoryPurchaseRepository();
 
 // Gateway compartido
 const pricingApi = new PricingApi();
@@ -115,6 +126,35 @@ const removeCouponUseCase = new RemoveCouponUseCase(
 );
 const removeCouponController = new RemoveCouponController(removeCouponUseCase);
 
+// Checkout Cart Use Case
+const checkoutCartPresenter = new CheckoutCartPresenter();
+const checkoutCartUseCase = new CheckoutCartUseCase(
+  cartRepository,
+  purchaseRepository,
+  checkoutCartPresenter,
+);
+const checkoutCartController = new CheckoutCartController(checkoutCartUseCase);
+
+// Get Purchase History Use Case
+const getPurchaseHistoryPresenter = new GetPurchaseHistoryPresenter();
+const getPurchaseHistoryUseCase = new GetPurchaseHistoryUseCase(
+  purchaseRepository,
+  getPurchaseHistoryPresenter,
+);
+const getPurchaseHistoryController = new GetPurchaseHistoryController(
+  getPurchaseHistoryUseCase,
+);
+
+// Get Purchase By Id Use Case
+const getPurchaseByIdPresenter = new GetPurchaseByIdPresenter();
+const getPurchaseByIdUseCase = new GetPurchaseByIdUseCase(
+  purchaseRepository,
+  getPurchaseByIdPresenter,
+);
+const getPurchaseByIdController = new GetPurchaseByIdController(
+  getPurchaseByIdUseCase,
+);
+
 // Configurar rutas
 const routes = buildRoutes({
   createCart: {
@@ -148,6 +188,18 @@ const routes = buildRoutes({
   removeCoupon: {
     controller: removeCouponController,
     presenter: removeCouponPresenter,
+  },
+  checkoutCart: {
+    controller: checkoutCartController,
+    presenter: checkoutCartPresenter,
+  },
+  getPurchaseHistory: {
+    controller: getPurchaseHistoryController,
+    presenter: getPurchaseHistoryPresenter,
+  },
+  getPurchaseById: {
+    controller: getPurchaseByIdController,
+    presenter: getPurchaseByIdPresenter,
   },
 });
 

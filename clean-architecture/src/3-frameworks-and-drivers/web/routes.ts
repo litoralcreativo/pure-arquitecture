@@ -107,5 +107,44 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
         },
       }),
     ),
+
+    // POST /checkout - Realizar checkout (finalizar compra)
+    RouteBuilder.post(
+      "/checkout",
+      controllers.checkoutCart.controller,
+      controllers.checkoutCart.presenter,
+      (req) => ({
+        body: {
+          customerId: req.body.customerId,
+        },
+      }),
+    ),
+
+    // GET /purchases/history/:customerId - Obtener historial de compras
+    RouteBuilder.get(
+      "/purchases/history/:customerId",
+      controllers.getPurchaseHistory.controller,
+      controllers.getPurchaseHistory.presenter,
+      (req) => ({
+        body: {},
+        params: {
+          customerId: String(req.params.customerId),
+        },
+      }),
+    ),
+
+    // GET /purchases/:purchaseId/customer/:customerId - Obtener detalle de una compra
+    RouteBuilder.get(
+      "/purchases/:purchaseId/customer/:customerId",
+      controllers.getPurchaseById.controller,
+      controllers.getPurchaseById.presenter,
+      (req) => ({
+        body: {},
+        params: {
+          purchaseId: String(req.params.purchaseId),
+          customerId: String(req.params.customerId),
+        },
+      }),
+    ),
   ];
 }

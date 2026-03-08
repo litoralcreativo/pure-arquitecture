@@ -1,0 +1,95 @@
+### Variables
+@baseUrl = http://localhost:3000
+@productId2 = p2
+@coupon10 = DESCUENTO10
+@couponFixed100 = PRIMERACOMPRA
+@couponExpired = VERANO98
+
+###############################################
+# Cupones - Tests de Errores
+# Tests: 51-58
+###############################################
+
+### 51. Crear carrito para c3 (para tests de error con cupones)
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3"
+}
+
+###
+
+### 52. Error - Aplicar cupón a carrito vacío (c3)
+# Debe rechazar porque el carrito está vacío
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "couponCode": "{{coupon10}}"
+}
+
+###
+
+### 53. Error - Cupón Inexistente
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "couponCode": "INVALIDO123"
+}
+
+###
+
+### 54. Agregar 1 p2 a c3 para tests con mínimo
+# Crear carrito pequeño con solo 1 p2 (Mouse $25)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "productId": "{{productId2}}"
+}
+
+###
+
+### 55. Ver carrito de c3 (pequeño)
+# Esperado: subtotal: $25, discount: $0, total: $25
+GET {{baseUrl}}/cart/c3 HTTP/1.1
+
+###
+
+### 56. Error - Cupón Expirado/Inactivo
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "couponCode": "{{couponExpired}}"
+}
+
+###
+
+### 57. Error - No cumple mínimo de compra (PRIMERACOMPRA requiere $300)
+# Subtotal $25 < $300 (mínimo requerido)
+POST {{baseUrl}}/cart/apply-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "couponCode": "{{couponFixed100}}"
+}
+
+###
+
+### 58. Error - Remover cupón cuando no hay ninguno aplicado
+DELETE {{baseUrl}}/cart/remove-coupon HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3"
+}
+
+###

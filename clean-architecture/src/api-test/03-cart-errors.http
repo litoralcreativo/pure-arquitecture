@@ -1,0 +1,84 @@
+### Variables
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+@productId1 = p1
+@productId2 = p2
+
+###############################################
+# Cart - Tests de Errores
+# Tests: 22-28
+###############################################
+
+### 22. Error - Crear Carrito Duplicado (c1 ya existe)
+# Intentar crear un carrito que ya existe
+POST {{baseUrl}}/cart HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}"
+}
+
+###
+
+### 23. Error - Obtener Carrito Inexistente (c3)
+# Intentar obtener un carrito que no existe
+GET {{baseUrl}}/cart/c3 HTTP/1.1
+
+###
+
+### 24. Error - Agregar Producto a Carrito Inexistente (c3)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "c3",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 25. Error - Producto Inexistente (p9)
+POST {{baseUrl}}/cart/add-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "p9"
+}
+
+###
+
+### 26. Error - Remover Producto que No Está en el Carrito
+# p1 ya fue removido del carrito de c1
+DELETE {{baseUrl}}/cart/remove-product HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "{{productId1}}"
+}
+
+###
+
+### 27. Error - Incrementar Cantidad de Producto No Existente (p9)
+PATCH {{baseUrl}}/cart/increase-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "p9"
+}
+
+###
+
+### 28. Error - Decrementar Cantidad de Producto No Existente (p9)
+PATCH {{baseUrl}}/cart/decrease-quantity HTTP/1.1
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId1}}",
+  "productId": "p9"
+}
+
+###

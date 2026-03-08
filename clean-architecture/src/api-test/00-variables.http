@@ -1,0 +1,11 @@
+### Variables Compartidas
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+@productId1 = p1
+@productId2 = p2
+@coupon10 = DESCUENTO10
+@coupon20 = DESCUENTO20
+@couponFixed50 = VERANO50
+@couponFixed100 = PRIMERACOMPRA
+@couponExpired = VERANO98

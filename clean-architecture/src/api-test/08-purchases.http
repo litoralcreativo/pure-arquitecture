@@ -1,0 +1,107 @@
+### Variables
+@baseUrl = http://localhost:3000
+@customerId1 = c1
+@customerId2 = c2
+
+###############################################
+# Consultas de Compras - Historial y Detalles
+# Tests: 104-117
+###############################################
+
+### 104. Verificar Historial Completo de c1
+# Debe mostrar todas las compras de c1 ordenadas por fecha (más reciente primero)
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+### 105. Verificar Historial Completo de c2
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+### 106. Verificar Historial de c3
+GET {{baseUrl}}/purchases/history/c3 HTTP/1.1
+
+###
+
+### 107. Historial de Cliente Sin Compras (debe estar vacío)
+GET {{baseUrl}}/purchases/history/c4 HTTP/1.1
+
+###
+
+### 108. Detalle Completo de Purchase de c1
+# Reemplazar {purchaseId} con un ID real del historial de c1
+# Ejemplo obtenido del test 104
+# Debe mostrar: purchaseId, customerId, items con detalles completos, subtotal, discount, total, createdAt, status
+GET {{baseUrl}}/purchases/pur-example-id/customer/{{customerId1}} HTTP/1.1
+
+###
+
+### 109. Detalle Completo de Purchase de c2
+# Reemplazar {purchaseId} con un ID real del historial de c2
+GET {{baseUrl}}/purchases/pur-example-id/customer/{{customerId2}} HTTP/1.1
+
+###
+
+### 110. Error - Purchase Inexistente
+# Intentar obtener detalle de purchase que no existe
+GET {{baseUrl}}/purchases/pur-nonexistent/customer/{{customerId1}} HTTP/1.1
+
+###
+
+### 111. Error - Cliente Accede a Purchase de Otro
+# c1 intenta ver purchase de c2 (RN-15: validación de propiedad)
+# Reemplazar {purchaseId-de-c2} con un ID real de c2
+GET {{baseUrl}}/purchases/pur-example-c2-id/customer/{{customerId1}} HTTP/1.1
+
+###
+
+### 112. Error - c2 Accede a Purchase de c1
+# Reemplazar {purchaseId-de-c1} con un ID real de c1
+GET {{baseUrl}}/purchases/pur-example-c1-id/customer/{{customerId2}} HTTP/1.1
+
+###
+
+### 113. Verificar Aislamiento - Historial de c1
+# Confirmar que c1 solo ve sus propias compras
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+### 114. Verificar Aislamiento - Historial de c2
+# Confirmar que c2 solo ve sus propias compras
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+### 115. Resumen Final - Estado de Carritos
+# Verificar que todos los carritos activos están vacíos o no existen después de checkouts
+GET {{baseUrl}}/cart/{{customerId1}} HTTP/1.1
+
+###
+
+### 116. Resumen Final - Estado de c2
+GET {{baseUrl}}/cart/{{customerId2}} HTTP/1.1
+
+###
+
+### 117. Resumen Final - Conteo Total de Compras
+# c1 debe tener 2 compras
+# c2 debe tener 1 compra
+# c3 debe tener 1 compra
+# Total: 4 compras en el sistema
+
+# Historial c1 (2 compras)
+GET {{baseUrl}}/purchases/history/{{customerId1}} HTTP/1.1
+
+###
+
+# Historial c2 (1 compra)
+GET {{baseUrl}}/purchases/history/{{customerId2}} HTTP/1.1
+
+###
+
+# Historial c3 (1 compra)
+GET {{baseUrl}}/purchases/history/c3 HTTP/1.1
+
+###

@@ -24,15 +24,15 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:snap-bbox="true"
-     inkscape:zoom="1.008497"
-     inkscape:cx="406.54558"
-     inkscape:cy="255.33045"
+     inkscape:zoom="2.8524603"
+     inkscape:cx="219.1091"
+     inkscape:cy="207.71542"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      inkscape:bbox-nodes="true"
      inkscape:snap-global="true"
      inkscape:snap-grids="true"
@@ -42,7 +42,8 @@
   <g
      inkscape:label="Clean"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     sodipodi:insensitive="true">
     <circle
        style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
        id="circle1532-8"
@@ -192,14 +193,53 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Onion"
-     sodipodi:insensitive="true">
-    <circle
-       style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       id="circle1532-8-8"
-       cx="157.93718"
-       cy="57.193195"
-       r="39.75" />
+     inkscape:label="Onion">
+    <g
+       id="g65165"
+       transform="rotate(-30,-12.68958,34.906907)">
+      <circle
+         style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         id="circle1532-8-8-6"
+         sodipodi:type="arc"
+         sodipodi:cx="124.27426"
+         sodipodi:cy="138.72554"
+         sodipodi:rx="39.75"
+         sodipodi:ry="39.75"
+         sodipodi:start="0"
+         sodipodi:end="2.0943951"
+         sodipodi:arc-type="slice"
+         d="m 164.02426,138.72554 a 39.75,39.75 0 0 1 -19.875,34.42451 39.75,39.75 0 0 1 -39.75,0 l 19.875,-34.42451 z" />
+      <circle
+         style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         id="circle64956"
+         sodipodi:type="arc"
+         sodipodi:cx="-185.96895"
+         sodipodi:cy="-10.218596"
+         sodipodi:rx="39.75"
+         sodipodi:ry="39.75"
+         sodipodi:start="0.26179939"
+         sodipodi:end="2.3561945"
+         sodipodi:arc-type="slice"
+         d="M -147.5734,0.06946067 A 39.75,39.75 0 0 1 -175.68089,28.176955 39.75,39.75 0 0 1 -214.07644,17.888898 l 28.10749,-28.107494 z"
+         inkscape:transform-center-x="-5.3079381"
+         inkscape:transform-center-y="-20.478041"
+         transform="rotate(-135)" />
+      <circle
+         style="fill:#3d588f;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         id="circle64956-6"
+         sodipodi:type="arc"
+         sodipodi:cx="101.83404"
+         sodipodi:cy="-155.94453"
+         sodipodi:rx="39.75"
+         sodipodi:ry="39.75"
+         sodipodi:start="0.26179939"
+         sodipodi:end="2.3561945"
+         sodipodi:arc-type="slice"
+         inkscape:transform-center-x="18.082454"
+         inkscape:transform-center-y="4.3108355"
+         transform="rotate(105)"
+         d="m 140.22959,-145.65648 a 39.75,39.75 0 0 1 -28.1075,28.1075 39.75,39.75 0 0 1 -38.395547,-10.28806 l 28.107497,-28.10749 z" />
+    </g>
     <circle
        style="fill:#8f3d3d;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
        id="circle1532-3"
@@ -253,62 +293,43 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-       x="157.90158"
-       y="34.625984"
+       x="158.45811"
+       y="32.399837"
        id="text24104-92"><tspan
          sodipodi:role="line"
          id="tspan24102-3"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-         x="157.90158"
-         y="34.625984">Controllers</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-       x="29.996521"
-       y="190.50505"
-       id="text24104-6-9"
-       transform="rotate(-60)"><tspan
+         x="158.45811"
+         y="32.399837">Application</tspan><tspan
          sodipodi:role="line"
-         id="tspan24102-2-7"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-         x="29.996521"
-         y="190.50505">Presenters</tspan></text>
+         x="158.45811"
+         y="35.222057"
+         id="tspan64291">services</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-       x="127.14994"
-       y="-83.167824"
-       id="text25100-8"
-       transform="rotate(60)"><tspan
-         sodipodi:role="line"
-         id="tspan25098-3"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-         x="127.14994"
-         y="-83.167824">Gateways</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-       x="125.69558"
-       y="-72.477707"
+       x="127.06352"
+       y="-72.748215"
        id="text27285-3"
        transform="rotate(60)"><tspan
          sodipodi:role="line"
          id="tspan27283-5"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-         x="125.69558"
-         y="-72.477707">Tests</tspan></text>
+         x="127.06352"
+         y="-72.748215">Tests</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-       x="30.555866"
-       y="201.07863"
+       x="30.45513"
+       y="200.37944"
        id="text28447-9"
        transform="rotate(-60)"><tspan
          sodipodi:role="line"
          id="tspan28445-1"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
-         x="30.555866"
-         y="201.07863">Infrastructure</tspan></text>
+         x="30.45513"
+         y="200.37944">Infrastructure</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.82222px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
