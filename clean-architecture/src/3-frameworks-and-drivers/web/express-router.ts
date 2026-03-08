@@ -1,23 +1,29 @@
 import express, { Router, Request, Response } from "express";
 import { RouteConfig } from "./route-config";
 
+/**
+ * Creates an Express router from route configurations.
+ * Maps Clean Architecture controllers/presenters to Express routes.
+ * @param routes - Array of route configurations
+ * @returns Configured Express router
+ */
 export function createRouter(routes: RouteConfig[]): Router {
   const router = express.Router();
 
   routes.forEach((route) => {
     const handler = async (req: Request, res: Response) => {
       try {
-        // Adaptar Express Request a HttpRequest genérico
+        // Adapt Express Request to generic HttpRequest
         const httpRequest = route.adaptRequest(req);
 
-        // Ejecutar controller
+        // Execute controller
         await route.controller.handle(httpRequest);
 
-        // Obtener y enviar respuesta desde presenter
+        // Get and send response from presenter
         const viewModel = route.presenter.getViewModel();
         res.json(viewModel);
       } catch (error) {
-        // Manejo de errores no capturados
+        // Handle uncaught errors
         console.error("Unhandled error in route:", error);
         res.status(500).json({
           success: false,
@@ -26,7 +32,7 @@ export function createRouter(routes: RouteConfig[]): Router {
       }
     };
 
-    // Registrar ruta según el método HTTP
+    // Register route by HTTP method
     switch (route.method) {
       case "GET":
         router.get(route.path, handler);

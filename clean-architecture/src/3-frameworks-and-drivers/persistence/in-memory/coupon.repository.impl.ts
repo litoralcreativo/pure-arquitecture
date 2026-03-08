@@ -1,6 +1,10 @@
 import { Coupon, CouponType } from "@entities/coupon";
 import { CouponRepository } from "@usecases/abstractions/coupon.repository";
 
+/**
+ * In-memory implementation of coupon repository.
+ * Pre-loads sample coupons for development and testing purposes.
+ */
 export class InMemoryCouponRepository implements CouponRepository {
   private coupons: Map<string, Coupon> = new Map();
 
@@ -8,8 +12,11 @@ export class InMemoryCouponRepository implements CouponRepository {
     this.seedCoupons();
   }
 
+  /**
+   * Seeds the repository with sample coupons based on business requirements.
+   */
   private seedCoupons(): void {
-    // Cupones según BUSINESS.md
+    // Coupons as defined in BUSINESS.md
     const coupons = [
       new Coupon({
         code: "DESCUENTO10",
@@ -53,6 +60,11 @@ export class InMemoryCouponRepository implements CouponRepository {
     });
   }
 
+  /**
+   * Finds a coupon by its code (case-insensitive).
+   * @param code - The coupon code to search for
+   * @returns The coupon if found, null otherwise
+   */
   async findByCode(code: string): Promise<Coupon | null> {
     const coupon = this.coupons.get(code.toUpperCase());
     return coupon || null;

@@ -4,9 +4,29 @@ import {
 } from "@frameworks-and-drivers/web/route-config";
 import { RouteControllers } from "@frameworks-and-drivers/web/route-helpers";
 
+/**
+ * Builds the complete route configuration for the application.
+ * Maps all HTTP endpoints to their respective controllers and presenters.
+ *
+ * Routes:
+ * - POST /cart - Create cart
+ * - GET /cart/:customerId - Get cart
+ * - POST /cart/add-product - Add product
+ * - DELETE /cart/remove-product - Remove product
+ * - PATCH /cart/increase-quantity - Increase quantity
+ * - PATCH /cart/decrease-quantity - Decrease quantity
+ * - POST /cart/apply-coupon - Apply coupon
+ * - DELETE /cart/remove-coupon - Remove coupon
+ * - POST /checkout - Checkout cart
+ * - GET /purchases/history/:customerId - Purchase history
+ * - GET /purchases/:purchaseId/customer/:customerId - Purchase details
+ *
+ * @param controllers - Map of controller/presenter pairs
+ * @returns Array of route configurations
+ */
 export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
   return [
-    // POST /cart - Crear un nuevo cart
+    // POST /cart - Create a new cart
     RouteBuilder.post(
       "/cart",
       controllers.createCart.controller,
@@ -18,7 +38,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // GET /cart/:customerId - Obtener el cart de un cliente
+    // GET /cart/:customerId - Get customer's cart
     RouteBuilder.get(
       "/cart/:customerId",
       controllers.getCart.controller,
@@ -31,7 +51,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // POST /cart/add-product - Agregar producto al cart
+    // POST /cart/add-product - Add product to cart
     RouteBuilder.post(
       "/cart/add-product",
       controllers.addProductToCart.controller,
@@ -44,7 +64,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // DELETE /cart/remove-product - Remover producto del cart
+    // DELETE /cart/remove-product - Remove product from cart
     RouteBuilder.delete(
       "/cart/remove-product",
       controllers.removeProductFromCart.controller,
@@ -57,7 +77,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // PATCH /cart/increase-quantity - Incrementar cantidad de un producto
+    // PATCH /cart/increase-quantity - Increase product quantity
     RouteBuilder.patch(
       "/cart/increase-quantity",
       controllers.increaseQuantity.controller,
@@ -70,7 +90,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // PATCH /cart/decrease-quantity - Decrementar cantidad de un producto
+    // PATCH /cart/decrease-quantity - Decrease product quantity
     RouteBuilder.patch(
       "/cart/decrease-quantity",
       controllers.decreaseQuantity.controller,
@@ -83,7 +103,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // POST /cart/apply-coupon - Aplicar cupón de descuento
+    // POST /cart/apply-coupon - Apply discount coupon
     RouteBuilder.post(
       "/cart/apply-coupon",
       controllers.applyCoupon.controller,
@@ -96,7 +116,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // DELETE /cart/remove-coupon - Remover cupón de descuento
+    // DELETE /cart/remove-coupon - Remove discount coupon
     RouteBuilder.delete(
       "/cart/remove-coupon",
       controllers.removeCoupon.controller,
@@ -108,7 +128,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // POST /checkout - Realizar checkout (finalizar compra)
+    // POST /checkout - Perform checkout (complete purchase)
     RouteBuilder.post(
       "/checkout",
       controllers.checkoutCart.controller,
@@ -120,7 +140,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // GET /purchases/history/:customerId - Obtener historial de compras
+    // GET /purchases/history/:customerId - Get purchase history
     RouteBuilder.get(
       "/purchases/history/:customerId",
       controllers.getPurchaseHistory.controller,
@@ -133,7 +153,7 @@ export function buildRoutes(controllers: RouteControllers): RouteConfig[] {
       }),
     ),
 
-    // GET /purchases/:purchaseId/customer/:customerId - Obtener detalle de una compra
+    // GET /purchases/:purchaseId/customer/:customerId - Get purchase details
     RouteBuilder.get(
       "/purchases/:purchaseId/customer/:customerId",
       controllers.getPurchaseById.controller,
