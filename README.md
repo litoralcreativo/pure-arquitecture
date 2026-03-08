@@ -9,18 +9,11 @@ Proyecto comparativo que implementa el mismo dominio de negocio (carrito de comp
 - Crear carritos personales por cliente
 - Agregar/remover productos
 - Gestionar cantidades
-- Consultar estado y calcular totales
+- Aplicar y remover cupones de descuento
+- Realizar checkout y completar compras
+- Consultar historial de compras
 
 📖 **Ver documentación completa del dominio**: [BUSINESS.md](./BUSINESS.md)
-
-**Casos de Uso Implementados:**
-
-1. Crear Carrito
-2. Obtener Carrito (con detalles y totales)
-3. Agregar Producto al Carrito
-4. Remover Producto del Carrito
-5. Incrementar Cantidad
-6. Decrementar Cantidad
 
 **Datos de Prueba:**
 
@@ -124,8 +117,7 @@ npm run clean:all
 ### Documentos Principales
 
 - 📊 [BUSINESS.md](./BUSINESS.md) - **Dominio de negocio y casos de uso** (EMPEZAR AQUÍ)
-- 🏛️ [ARCHITECTURE_COMPARISON.md](./ARCHITECTURE_COMPARISON.md) - Comparativa de arquitecturas
-- 📝 [TODO.md](./TODO.md) - Roadmap y tareas pendientes
+- 🏛️ [ARCHITECTURE_COMPARISON.md](./docs/ARCHITECTURE_COMPARISON.md) - Comparativa de arquitecturas
 
 ### Por Arquitectura
 

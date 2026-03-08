@@ -15,23 +15,11 @@
 
 ## 🎯 Clean Architecture
 
-### Estructura:
+### Diagrama Visual:
 
-```
-┌─────────────────────────────────────────┐
-│  Frameworks & Drivers (Web, DB, APIs)   │ Capa 3
-│  ┌───────────────────────────────────┐  │
-│  │  Interface Adapters               │  │ Capa 2
-│  │  ┌─────────────────────────────┐  │  │
-│  │  │  Application Business Rules │  │  │ Capa 1
-│  │  │  ┌───────────────────────┐  │  │  │
-│  │  │  │ Enterprise Business   │  │  │  │ Capa 0
-│  │  │  │      Rules            │  │  │  │
-│  │  │  └───────────────────────┘  │  │  │
-│  │  └─────────────────────────────┘  │  │
-│  └───────────────────────────────────┘  │
-└─────────────────────────────────────────┘
-```
+![Clean Architecture Diagram](./diagrams/clean.png)
+
+_Diagrama de las capas concéntricas de Clean Architecture mostrando el flujo de dependencias hacia el centro._
 
 ### Componentes Clave:
 
