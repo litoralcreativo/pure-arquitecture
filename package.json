@@ -1,27 +1,36 @@
 {
   "name": "pure-architectures",
   "version": "1.0.0",
-  "description": "Proyecto comparativo de arquitecturas puras: Clean, Onion y Hexagonal",
+  "description": "Proyecto comparativo de arquitecturas: Clean, Onion, Hexagonal, Vertical Slice, MVC y N-Layer",
   "private": true,
   "workspaces": [
     "clean-architecture",
     "onion-architecture",
-    "hexagonal-architecture"
+    "hexagonal-architecture",
+    "vertical-slice-architecture",
+    "mvc-architecture",
+    "n-layer-architecture"
   ],
   "scripts": {
-    "install:all": "npm install && npm install --workspace=clean-architecture && npm install --workspace=onion-architecture && npm install --workspace=hexagonal-architecture",
+    "install:all": "npm install && npm install --workspace=clean-architecture && npm install --workspace=onion-architecture && npm install --workspace=hexagonal-architecture && npm install --workspace=vertical-slice-architecture && npm install --workspace=mvc-architecture && npm install --workspace=n-layer-architecture",
     "build:all": "npm run build --workspaces --if-present",
     "test:all": "npm run test --workspaces --if-present",
     "clean:all": "npm run clean --workspaces --if-present && rimraf node_modules",
     "dev:clean": "npm run dev --workspace=clean-architecture",
     "dev:onion": "npm run dev --workspace=onion-architecture",
     "dev:hexagonal": "npm run dev --workspace=hexagonal-architecture",
+    "dev:vertical": "npm run dev --workspace=vertical-slice-architecture",
+    "dev:mvc": "npm run dev --workspace=mvc-architecture",
+    "dev:nlayer": "npm run dev --workspace=n-layer-architecture",
     "lint:all": "npm run lint --workspaces --if-present"
   },
   "keywords": [
     "clean-architecture",
     "onion-architecture",
     "hexagonal-architecture",
+    "vertical-slice-architecture",
+    "mvc-architecture",
+    "n-layer-architecture",
     "ports-and-adapters",
     "typescript",
     "nodejs"

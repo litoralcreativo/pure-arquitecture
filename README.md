@@ -1,6 +1,6 @@
 # Proyecto de Arquitecturas Puras
 
-Proyecto comparativo que implementa el mismo dominio de negocio (carrito de compras) usando cuatro arquitecturas de software populares:
+Proyecto comparativo que implementa el mismo dominio de negocio (carrito de compras) usando multiples arquitecturas de software populares:
 
 ## 📊 Dominio de Negocio
 
@@ -22,26 +22,26 @@ Proyecto comparativo que implementa el mismo dominio de negocio (carrito de comp
 
 ## 🏗️ Arquitecturas Implementadas
 
-### 1. **Clean Architecture** (Robert C. Martin - Uncle Bob)
+### 1. **MVC Architecture** (Model-View-Controller)
 
-Ubicación: `./clean-architecture`
+Ubicación: `./mvc-architecture` _(Próximamente)_
 
-Organización en capas concéntricas donde las dependencias apuntan hacia el centro:
+Patrón arquitectónico clásico de separación en tres componentes:
 
-- **Capa 0**: Enterprise Business Rules (Entidades)
-- **Capa 1**: Application Business Rules (Casos de Uso)
-- **Capa 2**: Interface Adapters (Controladores, Presenters, Gateways)
-- **Capa 3**: Frameworks & Drivers (Web, DB, External Services)
+- **Model**: Lógica de negocio y datos
+- **View**: Presentación e interfaz de usuario
+- **Controller**: Manejo de requests y coordinación
 
-### 2. **Onion Architecture** (Jeffrey Palermo)
+### 2. **N-Layer Architecture** (Arquitectura en Capas Tradicional)
 
-Ubicación: `./onion-architecture` _(Próximamente)_
+Ubicación: `./n-layer-architecture` _(Próximamente)_
 
-Similar a Clean Architecture pero con énfasis en:
+Arquitectura tradicional organizada en capas horizontales:
 
-- Domain Model en el centro
-- Capas de servicios de dominio
-- Interfaces de infraestructura en capas externas
+- **Presentation Layer**: UI/API
+- **Business Logic Layer**: Lógica de negocio
+- **Data Access Layer**: Acceso a datos
+- Dependencias pueden fluir en ambas direcciones
 
 ### 3. **Hexagonal Architecture** (Alistair Cockburn - Ports & Adapters)
 
@@ -54,7 +54,28 @@ Arquitectura basada en puertos y adaptadores:
 - Adaptadores (implementaciones concretas)
 - Lado izquierdo (driving adapters) y derecho (driven adapters)
 
-### 4. **Vertical Slice Architecture** (Jimmy Bogard)
+### 4. **Onion Architecture** (Jeffrey Palermo)
+
+Ubicación: `./onion-architecture` _(Próximamente)_
+
+Similar a Clean Architecture pero con énfasis en:
+
+- Domain Model en el centro
+- Capas de servicios de dominio
+- Interfaces de infraestructura en capas externas
+
+### 5. **Clean Architecture** (Robert C. Martin - Uncle Bob)
+
+Ubicación: `./clean-architecture`
+
+Organización en capas concéntricas donde las dependencias apuntan hacia el centro:
+
+- **Capa 0**: Enterprise Business Rules (Entidades)
+- **Capa 1**: Application Business Rules (Casos de Uso)
+- **Capa 2**: Interface Adapters (Controladores, Presenters, Gateways)
+- **Capa 3**: Frameworks & Drivers (Web, DB, External Services)
+
+### 6. **Vertical Slice Architecture** (Jimmy Bogard)
 
 Ubicación: `./vertical-slice-architecture` _(Próximamente)_
 
@@ -81,14 +102,20 @@ cd clean-architecture && npm install
 ### Desarrollo
 
 ```bash
-# Ejecutar Clean Architecture
-npm run dev:clean
+# Ejecutar MVC Architecture (próximamente)
+npm run dev:mvc
+
+# Ejecutar N-Layer Architecture (próximamente)
+npm run dev:nlayer
+
+# Ejecutar Hexagonal Architecture (próximamente)
+npm run dev:hexagonal
 
 # Ejecutar Onion Architecture (próximamente)
 npm run dev:onion
 
-# Ejecutar Hexagonal Architecture (próximamente)
-npm run dev:hexagonal
+# Ejecutar Clean Architecture
+npm run dev:clean
 
 # Ejecutar Vertical Slice Architecture (próximamente)
 npm run dev:vertical
@@ -121,11 +148,11 @@ npm run clean:all
 
 ### Por Arquitectura
 
-#### Clean Architecture ✅
+#### MVC Architecture 🔄
 
-- 📖 [README](./clean-architecture/README.md) - Documentación del proyecto
+- _(Próximamente)_
 
-#### Onion Architecture 🔄
+#### N-Layer Architecture 🔄
 
 - _(Próximamente)_
 
@@ -133,13 +160,21 @@ npm run clean:all
 
 - _(Próximamente)_
 
+#### Onion Architecture 🔄
+
+- _(Próximamente)_
+
+#### Clean Architecture ✅
+
+- 📖 [README](./clean-architecture/README.md) - Documentación del proyecto
+
 #### Vertical Slice Architecture 🔄
 
 - _(Próximamente)_
 
 ## 🎯 Objetivo del Proyecto
 
-Comparar y contrastar las cuatro arquitecturas:
+Comparar y contrastar las seis arquitecturas:
 
 - Similitudes y diferencias
 - Ventajas y desventajas
@@ -151,9 +186,11 @@ Comparar y contrastar las cuatro arquitecturas:
 
 ## 📖 Recursos
 
-- [Clean Architecture Book - Robert C. Martin](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
-- [Onion Architecture - Jeffrey Palermo](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+- [MVC Pattern - Martin Fowler](https://martinfowler.com/eaaDev/uiArchs.html)
+- [N-Layer Architecture - Microsoft Docs](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
 - [Hexagonal Architecture - Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
+- [Onion Architecture - Jeffrey Palermo](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+- [Clean Architecture Book - Robert C. Martin](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
 - [Vertical Slice Architecture - Jimmy Bogard](https://www.jimmybogard.com/vertical-slice-architecture/)
 
 ## 📄 Licencia
