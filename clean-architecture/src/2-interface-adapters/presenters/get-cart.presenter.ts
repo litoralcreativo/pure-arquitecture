@@ -1,33 +1,29 @@
 import {
   GetCartOutputBoundary,
   GetCartViewModel,
-  CartItemViewModel,
+  GetCartSuccessData,
 } from "@usecases/use-cases/get-cart/get-cart.output-boundary";
 import { Presenter } from "@interface-adapters/abstractions/presenter";
 
+/**
+ * Presenter for get cart use case.
+ * Transforms cart data into view-ready format.
+ */
 export class GetCartPresenter
   implements GetCartOutputBoundary, Presenter<GetCartViewModel>
 {
   private viewModel: GetCartViewModel = { success: false };
 
-  presentSuccess(
-    customerId: string,
-    items: CartItemViewModel[],
-    totalItems: number,
-    subtotal: number,
-    discount: number,
-    couponCode: string | null,
-    totalAmount: number,
-  ): void {
+  presentSuccess(data: GetCartSuccessData): void {
     this.viewModel = {
       success: true,
-      customerId,
-      items,
-      totalItems,
-      subtotal,
-      discount,
-      couponCode: couponCode || undefined,
-      totalAmount,
+      customerId: data.customerId,
+      items: data.items,
+      totalItems: data.totalItems,
+      subtotal: data.subtotal,
+      discount: data.discount,
+      couponCode: data.couponCode || undefined,
+      totalAmount: data.totalAmount,
     };
   }
 

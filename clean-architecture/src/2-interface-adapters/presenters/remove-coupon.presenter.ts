@@ -9,13 +9,8 @@ export class RemoveCouponPresenter
 {
   private viewModel: RemoveCouponViewModel = { success: false };
 
-  presentSuccess(subtotal: number, total: number): void {
-    this.viewModel = {
-      success: true,
-      message: "Coupon removed successfully",
-      subtotal,
-      total,
-    };
+  presentSuccess(): void {
+    this.viewModel = { success: true };
   }
 
   presentError(message: string): void {

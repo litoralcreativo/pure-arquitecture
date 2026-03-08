@@ -1,8 +1,14 @@
-import { RemoveProductFromCartInputBoundary } from "./remove-product-from-cart.input-boundary";
-import { RemoveProductFromCartInput } from "./remove-product-from-cart.dto";
+import {
+  RemoveProductFromCartInputBoundary,
+  RemoveProductFromCartInput,
+} from "./remove-product-from-cart.input-boundary";
 import { CartRepository } from "@usecases/abstractions/cart.repository";
 import { RemoveProductFromCartOutputBoundary } from "./remove-product-from-cart.output-boundary";
 
+/**
+ * Use case for removing products from cart.
+ * Validates cart and product existence before removal.
+ */
 export class RemoveProductFromCartUseCase implements RemoveProductFromCartInputBoundary {
   constructor(
     private cartRepository: CartRepository,

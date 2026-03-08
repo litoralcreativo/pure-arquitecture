@@ -1,10 +1,12 @@
 import { PurchaseRepository } from "../../abstractions/purchase.repository";
-import { GetPurchaseByIdInputBoundary } from "./get-purchase-by-id.input-boundary";
+import {
+  GetPurchaseByIdInputBoundary,
+  GetPurchaseByIdInput,
+} from "./get-purchase-by-id.input-boundary";
 import {
   GetPurchaseByIdOutputBoundary,
   PurchaseItemViewModel,
 } from "./get-purchase-by-id.output-boundary";
-import { GetPurchaseByIdInput } from "./get-purchase-by-id.dto";
 
 /**
  * GetPurchaseByIdUseCase - Caso de uso para consultar detalle de una compra
@@ -25,12 +27,10 @@ export class GetPurchaseByIdUseCase implements GetPurchaseByIdInputBoundary {
     private readonly presenter: GetPurchaseByIdOutputBoundary,
   ) {}
 
-  public async execute(request: GetPurchaseByIdInput): Promise<void> {
+  public async execute(input: GetPurchaseByIdInput): Promise<void> {
     try {
       // 1. Buscar la compra por ID
-      const purchase = await this.purchaseRepository.findById(
-        request.purchaseId,
-      );
+      const purchase = await this.purchaseRepository.findById(input.purchaseId);
 
       // 2. Validar que existe
       if (!purchase) {
@@ -39,7 +39,7 @@ export class GetPurchaseByIdUseCase implements GetPurchaseByIdInputBoundary {
       }
 
       // 3. Validar que pertenece al cliente (RN-15)
-      if (purchase.customerId !== request.customerId) {
+      if (purchase.customerId !== input.customerId) {
         this.presenter.presentError(
           "Purchase does not belong to this customer",
         );

@@ -3,9 +3,11 @@ import { PurchaseRepository } from "../../abstractions/purchase.repository";
 import { Purchase } from "../../../0-enterprise-business-rules/purchase";
 import { PurchaseItem } from "../../../0-enterprise-business-rules/purchase-item";
 import { PurchaseStatus } from "../../../0-enterprise-business-rules/purchase-status";
-import { CheckoutCartInputBoundary } from "./checkout-cart.input-boundary";
+import {
+  CheckoutCartInputBoundary,
+  CheckoutCartInput,
+} from "./checkout-cart.input-boundary";
 import { CheckoutCartOutputBoundary } from "./checkout-cart.output-boundary";
-import { CheckoutCartInput } from "./checkout-cart.dto";
 
 /**
  * CheckoutCartUseCase - Caso de uso para realizar el checkout
@@ -30,12 +32,10 @@ export class CheckoutCartUseCase implements CheckoutCartInputBoundary {
     private readonly presenter: CheckoutCartOutputBoundary,
   ) {}
 
-  public async execute(request: CheckoutCartInput): Promise<void> {
+  public async execute(input: CheckoutCartInput): Promise<void> {
     try {
       // 1. Obtener el carrito del cliente
-      const cart = await this.cartRepository.getByCustomerId(
-        request.customerId,
-      );
+      const cart = await this.cartRepository.getByCustomerId(input.customerId);
 
       if (!cart) {
         this.presenter.presentError("Cart not found for this customer");

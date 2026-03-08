@@ -1,4 +1,9 @@
-import { GetPurchaseHistoryInput } from "./get-purchase-history.dto";
+/**
+ * Input data for getting purchase history.
+ */
+export interface GetPurchaseHistoryInput {
+  customerId: string;
+}
 
 /**
  * GetPurchaseHistoryInputBoundary - Contrato del caso de uso
@@ -8,7 +13,7 @@ import { GetPurchaseHistoryInput } from "./get-purchase-history.dto";
 export interface GetPurchaseHistoryInputBoundary {
   /**
    * Ejecuta la consulta del historial de compras
-   * @param request - Datos necesarios (customerId)
+   * @param input - Datos necesarios (customerId)
    */
-  execute(request: GetPurchaseHistoryInput): Promise<void>;
+  execute(input: GetPurchaseHistoryInput): Promise<void>;
 }

@@ -1,4 +1,10 @@
-import { GetPurchaseByIdInput } from "./get-purchase-by-id.dto";
+/**
+ * Input data for getting purchase by ID.
+ */
+export interface GetPurchaseByIdInput {
+  purchaseId: string;
+  customerId: string;
+}
 
 /**
  * GetPurchaseByIdInputBoundary - Contrato del caso de uso
@@ -8,7 +14,7 @@ import { GetPurchaseByIdInput } from "./get-purchase-by-id.dto";
 export interface GetPurchaseByIdInputBoundary {
   /**
    * Ejecuta la consulta del detalle de una compra
-   * @param request - Datos necesarios (purchaseId, customerId)
+   * @param input - Datos necesarios (purchaseId, customerId)
    */
-  execute(request: GetPurchaseByIdInput): Promise<void>;
+  execute(input: GetPurchaseByIdInput): Promise<void>;
 }

@@ -1,30 +1,34 @@
 import { CartRepository } from "@usecases/abstractions/cart.repository";
-import { RemoveCouponInputBoundary } from "./remove-coupon.input-boundary";
+import {
+  RemoveCouponInputBoundary,
+  RemoveCouponInput,
+} from "./remove-coupon.input-boundary";
 import { RemoveCouponOutputBoundary } from "./remove-coupon.output-boundary";
-import { RemoveCouponInput } from "./remove-coupon.dto";
 
+/**
+ * Use case for removing coupon from cart.
+ * Validates cart existence and removes applied discount.
+ */
 export class RemoveCouponUseCase implements RemoveCouponInputBoundary {
   constructor(
     private readonly cartRepository: CartRepository,
     private readonly presenter: RemoveCouponOutputBoundary,
   ) {}
 
-  async execute(request: RemoveCouponInput): Promise<void> {
+  async execute(input: RemoveCouponInput): Promise<void> {
     try {
       // Validar datos de entrada
-      if (!request.customerId) {
+      if (!input.customerId) {
         this.presenter.presentError("Customer ID is required");
         return;
       }
 
       // Buscar el carrito del cliente
-      const cart = await this.cartRepository.getByCustomerId(
-        request.customerId,
-      );
+      const cart = await this.cartRepository.getByCustomerId(input.customerId);
 
       if (!cart) {
         this.presenter.presentError(
-          `Cart not found for customer ${request.customerId}`,
+          `Cart not found for customer ${input.customerId}`,
         );
         return;
       }
@@ -43,10 +47,7 @@ export class RemoveCouponUseCase implements RemoveCouponInputBoundary {
       await this.cartRepository.save(cart);
 
       // Presentar el resultado exitoso
-      this.presenter.presentSuccess(
-        cart.calculateSubtotal(),
-        cart.calculateTotal(),
-      );
+      this.presenter.presentSuccess();
     } catch (error) {
       this.presenter.presentError(
         error instanceof Error ? error.message : "Unknown error occurred",

@@ -1,34 +1,40 @@
 import { CartRepository } from "../../abstractions/cart.repository";
-import { DecreaseQuantityDTO } from "./decrease-quantity.dto";
-import { DecreaseQuantityInputBoundary } from "./decrease-quantity.input-boundary";
+import {
+  DecreaseQuantityInput,
+  DecreaseQuantityInputBoundary,
+} from "./decrease-quantity.input-boundary";
 import { DecreaseQuantityOutputBoundary } from "./decrease-quantity.output-boundary";
 
+/**
+ * Use case for decreasing product quantity in cart.
+ * Validates cart and product existence, then decrements quantity.
+ */
 export class DecreaseQuantityUseCase implements DecreaseQuantityInputBoundary {
   constructor(
     private cartRepository: CartRepository,
     private presenter: DecreaseQuantityOutputBoundary,
   ) {}
 
-  async execute(dto: DecreaseQuantityDTO): Promise<void> {
+  async execute(input: DecreaseQuantityInput): Promise<void> {
     try {
-      const cart = await this.cartRepository.getByCustomerId(dto.customerId);
+      const cart = await this.cartRepository.getByCustomerId(input.customerId);
 
       if (!cart) {
-        this.presenter.cartNotFound();
+        this.presenter.presentError("Cart not found");
         return;
       }
 
-      const productDecreased = cart.decreaseQuantity(dto.productId);
+      const productDecreased = cart.decreaseQuantity(input.productId);
 
       if (!productDecreased) {
-        this.presenter.productNotFoundInCart();
+        this.presenter.presentError("Product not found in cart");
         return;
       }
 
       await this.cartRepository.save(cart);
-      this.presenter.success();
+      this.presenter.presentSuccess();
     } catch (error) {
-      this.presenter.error(
+      this.presenter.presentError(
         error instanceof Error ? error.message : "Unknown error",
       );
     }

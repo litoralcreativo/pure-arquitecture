@@ -1,4 +1,9 @@
-import { CheckoutCartInput } from "./checkout-cart.dto";
+/**
+ * Input data for checkout cart operation.
+ */
+export interface CheckoutCartInput {
+  customerId: string;
+}
 
 /**
  * CheckoutCartInputBoundary - Contrato del caso de uso Checkout
@@ -9,7 +14,7 @@ import { CheckoutCartInput } from "./checkout-cart.dto";
 export interface CheckoutCartInputBoundary {
   /**
    * Ejecuta el proceso de checkout
-   * @param request - Datos necesarios para el checkout (customerId)
+   * @param input - Datos necesarios para el checkout (customerId)
    */
-  execute(request: CheckoutCartInput): Promise<void>;
+  execute(input: CheckoutCartInput): Promise<void>;
 }

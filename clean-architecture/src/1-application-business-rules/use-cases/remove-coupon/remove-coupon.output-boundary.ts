@@ -1,13 +1,16 @@
+/**
+ * View model for the remove coupon use case response.
+ */
 export interface RemoveCouponViewModel {
   success: boolean;
-  message?: string;
-  subtotal?: number;
-  total?: number;
   error?: string;
 }
 
+/**
+ * Output boundary for removing a coupon from the cart.
+ */
 export interface RemoveCouponOutputBoundary {
-  presentSuccess(subtotal: number, total: number): void;
+  presentSuccess(): void;
   presentError(message: string): void;
   getViewModel(): RemoveCouponViewModel;
 }

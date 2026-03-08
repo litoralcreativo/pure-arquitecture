@@ -1,10 +1,16 @@
-import { CreateCartInputBoundary } from "./create-cart.input-boundary";
-import { CreateCartInput } from "./create-cart.dto";
+import {
+  CreateCartInputBoundary,
+  CreateCartInput,
+} from "./create-cart.input-boundary";
 import { CartRepository } from "@usecases/abstractions/cart.repository";
 import { CustomerRepository } from "@usecases/abstractions/customer.repository";
 import { CreateCartOutputBoundary } from "./create-cart.output-boundary";
 import { Cart } from "@entities/cart";
 
+/**
+ * Use case for creating a new shopping cart.
+ * Validates customer existence and ensures no duplicate carts.
+ */
 export class CreateCartUseCase implements CreateCartInputBoundary {
   constructor(
     private cartRepository: CartRepository,
@@ -38,7 +44,7 @@ export class CreateCartUseCase implements CreateCartInputBoundary {
       // Guardar cart
       await this.cartRepository.save(cart);
 
-      this.presenter.presentSuccess(input.customerId);
+      this.presenter.presentSuccess({ cartId: input.customerId });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unexpected error occurred";

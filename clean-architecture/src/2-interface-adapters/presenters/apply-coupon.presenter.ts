@@ -1,27 +1,27 @@
 import {
   ApplyCouponOutputBoundary,
   ApplyCouponViewModel,
+  ApplyCouponSuccessData,
 } from "@usecases/use-cases/apply-coupon/apply-coupon.output-boundary";
 import { Presenter } from "@interface-adapters/abstractions/presenter";
 
+/**
+ * Presenter for apply coupon use case.
+ * Handles coupon application result presentation.
+ */
 export class ApplyCouponPresenter
   implements ApplyCouponOutputBoundary, Presenter<ApplyCouponViewModel>
 {
   private viewModel: ApplyCouponViewModel = { success: false };
 
-  presentSuccess(
-    subtotal: number,
-    discount: number,
-    total: number,
-    couponCode: string,
-  ): void {
+  presentSuccess(data: ApplyCouponSuccessData): void {
     this.viewModel = {
       success: true,
-      message: `Coupon '${couponCode}' applied successfully`,
-      subtotal,
-      discount,
-      total,
-      couponCode,
+      message: `Coupon '${data.couponCode}' applied successfully`,
+      subtotal: data.subtotal,
+      discount: data.discount,
+      total: data.total,
+      couponCode: data.couponCode,
     };
   }
 

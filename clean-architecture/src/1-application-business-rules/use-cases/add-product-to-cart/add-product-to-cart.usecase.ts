@@ -1,10 +1,16 @@
-import { AddProductToCartInputBoundary } from "./add-product-to-cart.input-boundary";
-import { AddProductToCartInput } from "./add-product-to-cart.dto";
+import {
+  AddProductToCartInputBoundary,
+  AddProductToCartInput,
+} from "./add-product-to-cart.input-boundary";
 import { CartRepository } from "@usecases/abstractions/cart.repository";
 import { ProductRepository } from "@usecases/abstractions/product.repository";
 import { AddProductToCartOutputBoundary } from "./add-product-to-cart.output-boundary";
 import { PriceGateway } from "@usecases/abstractions/price.gateway";
 
+/**
+ * Use case for adding products to shopping cart.
+ * Validates cart and product existence, retrieves pricing, and updates cart.
+ */
 export class AddProductToCartUseCase implements AddProductToCartInputBoundary {
   constructor(
     private cartRepository: CartRepository,

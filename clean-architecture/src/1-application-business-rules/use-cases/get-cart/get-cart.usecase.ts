@@ -1,11 +1,14 @@
-import { GetCartInputBoundary } from "./get-cart.input-boundary";
-import { GetCartInput } from "./get-cart.dto";
+import { GetCartInputBoundary, GetCartInput } from "./get-cart.input-boundary";
 import { CartRepository } from "@usecases/abstractions/cart.repository";
 import {
   GetCartOutputBoundary,
   CartItemViewModel,
 } from "./get-cart.output-boundary";
 
+/**
+ * Use case for retrieving cart information.
+ * Returns cart items, totals, and applied discounts.
+ */
 export class GetCartUseCase implements GetCartInputBoundary {
   constructor(
     private cartRepository: CartRepository,
@@ -44,15 +47,15 @@ export class GetCartUseCase implements GetCartInputBoundary {
       const couponCode = cart.appliedCoupon?.code || null;
       const totalAmount = cart.calculateTotal();
 
-      this.presenter.presentSuccess(
-        input.customerId,
+      this.presenter.presentSuccess({
+        customerId: input.customerId,
         items,
         totalItems,
         subtotal,
         discount,
         couponCode,
         totalAmount,
-      );
+      });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unexpected error occurred";

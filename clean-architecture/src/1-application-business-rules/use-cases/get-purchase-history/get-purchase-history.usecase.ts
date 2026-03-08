@@ -1,10 +1,12 @@
 import { PurchaseRepository } from "../../abstractions/purchase.repository";
-import { GetPurchaseHistoryInputBoundary } from "./get-purchase-history.input-boundary";
+import {
+  GetPurchaseHistoryInputBoundary,
+  GetPurchaseHistoryInput,
+} from "./get-purchase-history.input-boundary";
 import {
   GetPurchaseHistoryOutputBoundary,
   PurchaseSummary,
 } from "./get-purchase-history.output-boundary";
-import { GetPurchaseHistoryInput } from "./get-purchase-history.dto";
 
 /**
  * GetPurchaseHistoryUseCase - Caso de uso para consultar historial de compras
@@ -24,11 +26,11 @@ export class GetPurchaseHistoryUseCase implements GetPurchaseHistoryInputBoundar
     private readonly presenter: GetPurchaseHistoryOutputBoundary,
   ) {}
 
-  public async execute(request: GetPurchaseHistoryInput): Promise<void> {
+  public async execute(input: GetPurchaseHistoryInput): Promise<void> {
     try {
       // 1. Obtener todas las compras del cliente
       const purchases = await this.purchaseRepository.findByCustomerId(
-        request.customerId,
+        input.customerId,
       );
 
       // 2. Convertir a resumen (ya vienen ordenadas por fecha desc desde el repo)

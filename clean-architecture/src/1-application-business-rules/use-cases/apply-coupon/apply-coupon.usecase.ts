@@ -1,9 +1,15 @@
 import { CartRepository } from "@usecases/abstractions/cart.repository";
 import { CouponRepository } from "@usecases/abstractions/coupon.repository";
-import { ApplyCouponInputBoundary } from "./apply-coupon.input-boundary";
+import {
+  ApplyCouponInputBoundary,
+  ApplyCouponInput,
+} from "./apply-coupon.input-boundary";
 import { ApplyCouponOutputBoundary } from "./apply-coupon.output-boundary";
-import { ApplyCouponInput } from "./apply-coupon.dto";
 
+/**
+ * Use case for applying discount coupons to cart.
+ * Validates coupon existence, cart state, and applies discount.
+ */
 export class ApplyCouponUseCase implements ApplyCouponInputBoundary {
   constructor(
     private readonly cartRepository: CartRepository,
@@ -11,22 +17,20 @@ export class ApplyCouponUseCase implements ApplyCouponInputBoundary {
     private readonly presenter: ApplyCouponOutputBoundary,
   ) {}
 
-  async execute(request: ApplyCouponInput): Promise<void> {
+  async execute(input: ApplyCouponInput): Promise<void> {
     try {
       // Validar datos de entrada
-      if (!request.customerId || !request.couponCode) {
+      if (!input.customerId || !input.couponCode) {
         this.presenter.presentError("Customer ID and coupon code are required");
         return;
       }
 
       // Buscar el carrito del cliente
-      const cart = await this.cartRepository.getByCustomerId(
-        request.customerId,
-      );
+      const cart = await this.cartRepository.getByCustomerId(input.customerId);
 
       if (!cart) {
         this.presenter.presentError(
-          `Cart not found for customer ${request.customerId}`,
+          `Cart not found for customer ${input.customerId}`,
         );
         return;
       }
@@ -39,11 +43,11 @@ export class ApplyCouponUseCase implements ApplyCouponInputBoundary {
 
       // Buscar el cupón
       const coupon = await this.couponRepository.findByCode(
-        request.couponCode.toUpperCase(),
+        input.couponCode.toUpperCase(),
       );
 
       if (!coupon) {
-        this.presenter.presentError(`Coupon '${request.couponCode}' not found`);
+        this.presenter.presentError(`Coupon '${input.couponCode}' not found`);
         return;
       }
 
@@ -69,12 +73,12 @@ export class ApplyCouponUseCase implements ApplyCouponInputBoundary {
       await this.cartRepository.save(cart);
 
       // Presentar el resultado exitoso
-      this.presenter.presentSuccess(
-        cart.calculateSubtotal(),
-        cart.calculateDiscount(),
-        cart.calculateTotal(),
-        coupon.code,
-      );
+      this.presenter.presentSuccess({
+        subtotal: cart.calculateSubtotal(),
+        discount: cart.calculateDiscount(),
+        total: cart.calculateTotal(),
+        couponCode: coupon.code,
+      });
     } catch (error) {
       this.presenter.presentError(
         error instanceof Error ? error.message : "Unknown error occurred",
