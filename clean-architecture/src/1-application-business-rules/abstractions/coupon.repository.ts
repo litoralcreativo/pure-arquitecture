@@ -1,10 +1,15 @@
 import { Coupon } from "@entities/coupon";
 
+/**
+ * Repository abstraction for coupon persistence.
+ * Defines operations for retrieving discount coupons.
+ * Implementations handle the actual data storage mechanism.
+ */
 export interface CouponRepository {
   /**
-   * Busca un cupón por su código
-   * @param code - Código del cupón a buscar
-   * @returns El cupón si existe, null si no se encuentra
+   * Retrieves a coupon by its code.
+   * @param code - The coupon code to search for
+   * @returns The coupon if found, null otherwise
    */
   findByCode(code: string): Promise<Coupon | null>;
 }

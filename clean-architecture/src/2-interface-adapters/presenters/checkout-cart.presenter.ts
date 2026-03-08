@@ -4,6 +4,10 @@ import {
 } from "@usecases/use-cases/checkout-cart/checkout-cart.output-boundary";
 import { Presenter } from "@interface-adapters/abstractions/presenter";
 
+/**
+ * Presenter for checkout cart use case.
+ * Transforms checkout results into view-ready format.
+ */
 export class CheckoutCartPresenter
   implements CheckoutCartOutputBoundary, Presenter<CheckoutCartViewModel>
 {

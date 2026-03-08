@@ -4,6 +4,10 @@ import {
   IncreaseQuantityViewModel,
 } from "@usecases/use-cases/increase-quantity/increase-quantity.output-boundary";
 
+/**
+ * Presenter for increase quantity use case.
+ * Transforms operation results into view-ready format.
+ */
 export class IncreaseQuantityPresenter
   implements
     IncreaseQuantityOutputBoundary,

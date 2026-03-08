@@ -5,6 +5,10 @@ import {
 } from "@usecases/use-cases/get-purchase-by-id/get-purchase-by-id.output-boundary";
 import { Presenter } from "@interface-adapters/abstractions/presenter";
 
+/**
+ * Presenter for get purchase by ID use case.
+ * Transforms purchase details into view-ready format.
+ */
 export class GetPurchaseByIdPresenter
   implements GetPurchaseByIdOutputBoundary, Presenter<GetPurchaseByIdViewModel>
 {

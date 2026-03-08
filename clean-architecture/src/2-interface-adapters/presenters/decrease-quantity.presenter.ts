@@ -4,6 +4,10 @@ import {
   DecreaseQuantityViewModel,
 } from "@usecases/use-cases/decrease-quantity/decrease-quantity.output-boundary";
 
+/**
+ * Presenter for decrease quantity use case.
+ * Transforms operation results into view-ready format.
+ */
 export class DecreaseQuantityPresenter
   implements
     DecreaseQuantityOutputBoundary,
